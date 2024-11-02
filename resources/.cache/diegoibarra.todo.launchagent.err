@@ -1,0 +1,10 @@
+/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/ToDoLauncher.sh:5: command not found: pyenv
+Traceback (most recent call last):
+  File "/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/makeTasks.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/ToDoLauncher.sh:5: command not found: pyenv
+Traceback (most recent call last):
+  File "/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/makeTasks.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'

@@ -1,0 +1,62 @@
+#!/bin/zsh
+
+function clearScreen() {
+    # CLEAR SCREEN AND SET CURSOR ON TOP
+    echo "\x1b[2J"
+    echo "\x1b[H"
+}
+
+function init() {
+    export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv" 
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" 
+    eval "$(pyenv init -)" 
+
+    cd /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo
+
+    ITEM_LIST=()
+    LOOP=true
+    HEIGHT=$(tput lines)
+    
+    # CHANGE FONT COLOR
+    echo "\x1b[38;5;202m"
+
+    clearScreen
+}
+
+function showTasks() {
+    clearScreen
+    task_str=$(sed 's/,/  -  /' TaskList.csv)
+    echo $task_str
+    echo "\x1b[${HEIGHT}B"
+    read -q "CONTINUE?Continue? (enter: no; y: yes): "
+    if [[ "$CONTINUE" == "y" ]]; then 
+        clearScreen
+    fi
+    if [[ "$CONTINUE" == "n" ]]; then 
+        clearScreen
+        exit
+    fi
+}
+
+####################################################################
+
+init
+
+while $LOOP; do
+    read "INPUT?: "
+    # QUIT LOOP
+    if [[ "$INPUT" == "" ]]; then LOOP=false; fi
+    
+    # SHOW ALL ITEMS IN LIST FILE
+    if [[ "$INPUT" == "list" || "$INPUT" == "l" ]]; then showTasks; 
+    
+    # APPEND INPUT TO LIST
+    else
+        ITEM_LIST+=($INPUT)
+    fi    
+done
+
+nohup python3 makeTasks.py $ITEM_LIST &
+
+echo "\x1b[0m"
+exit
