@@ -4,3 +4,5 @@
 resources/todo_log
 /resources/images
 *.png
+TaskList.csv
+nohup.out

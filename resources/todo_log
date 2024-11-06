@@ -37,3 +37,210 @@
 11.02[00:10:14]: STREAM b'IHDR' 16 13
 11.02[00:10:14]: STREAM b'IDAT' 41 57519
 11.02[00:10:14]: module: updateWallpaper
+11.02[08:00:07]: makeTable.py: 
+11.02[08:00:14]: STREAM b'IHDR' 16 13
+11.02[08:00:14]: STREAM b'sRGB' 41 1
+11.02[08:00:14]: STREAM b'IDAT' 54 8192
+11.02[08:00:14]: makeWallpaper.py: 
+11.02[08:00:14]: module: getTablePath
+11.02[08:00:14]: module: deletePreviousWallpaper
+11.02[08:00:14]: module: todoListNotEmpty
+11.02[08:00:14]: STREAM b'IHDR' 16 13
+11.02[08:00:14]: STREAM b'IDAT' 41 63507
+11.02[08:00:14]: STREAM b'IHDR' 16 13
+11.02[08:00:14]: STREAM b'IDAT' 41 57519
+11.02[08:00:14]: module: updateWallpaper
+11.02[10:01:04]: makeTasks.py: 
+11.02[10:01:04]: makeTable.py: 
+11.02[10:01:11]: STREAM b'IHDR' 16 13
+11.02[10:01:11]: STREAM b'sRGB' 41 1
+11.02[10:01:11]: STREAM b'IDAT' 54 8192
+11.02[10:01:11]: makeWallpaper.py: 
+11.02[10:01:11]: module: getTablePath
+11.02[10:01:11]: module: deletePreviousWallpaper
+11.02[10:01:11]: module: todoListNotEmpty
+11.02[10:01:11]: STREAM b'IHDR' 16 13
+11.02[10:01:11]: STREAM b'IDAT' 41 59474
+11.02[10:01:11]: STREAM b'IHDR' 16 13
+11.02[10:01:11]: STREAM b'IDAT' 41 57519
+11.02[10:01:11]: module: updateWallpaper
+11.02[10:01:12]: ----------------------------DONE----------------------------
+
+
+11.02[10:02:53]: makeTasks.py: 
+11.02[10:02:53]: makeTable.py: 
+11.02[10:02:54]: STREAM b'IHDR' 16 13
+11.02[10:02:54]: STREAM b'sRGB' 41 1
+11.02[10:02:54]: STREAM b'IDAT' 54 8192
+11.02[10:02:54]: makeWallpaper.py: 
+11.02[10:02:54]: module: getTablePath
+11.02[10:02:54]: module: deletePreviousWallpaper
+11.02[10:02:54]: module: todoListNotEmpty
+11.02[10:02:54]: STREAM b'IHDR' 16 13
+11.02[10:02:54]: STREAM b'IDAT' 41 58207
+11.02[10:02:54]: STREAM b'IHDR' 16 13
+11.02[10:02:54]: STREAM b'IDAT' 41 57519
+11.02[10:02:55]: module: updateWallpaper
+11.02[10:02:55]: ----------------------------DONE----------------------------
+
+
+11.02[11:33:09]: makeTasks.py: 
+11.02[11:33:09]: makeTable.py: 
+11.02[11:33:10]: STREAM b'IHDR' 16 13
+11.02[11:33:10]: STREAM b'sRGB' 41 1
+11.02[11:33:10]: STREAM b'IDAT' 54 8192
+11.02[11:33:10]: makeWallpaper.py: 
+11.02[11:33:10]: module: getTablePath
+11.02[11:33:10]: module: deletePreviousWallpaper
+11.02[11:33:10]: module: todoListNotEmpty
+11.02[11:33:10]: STREAM b'IHDR' 16 13
+11.02[11:33:10]: STREAM b'IDAT' 41 65536
+11.02[11:33:10]: STREAM b'IHDR' 16 13
+11.02[11:33:10]: STREAM b'IDAT' 41 57519
+11.02[11:33:10]: module: updateWallpaper
+11.02[11:33:11]: ----------------------------DONE----------------------------
+
+
+11.02[18:00:07]: makeTable.py: 
+11.02[18:00:09]: STREAM b'IHDR' 16 13
+11.02[18:00:09]: STREAM b'sRGB' 41 1
+11.02[18:00:09]: STREAM b'IDAT' 54 8192
+11.02[18:00:09]: makeWallpaper.py: 
+11.02[18:00:09]: module: getTablePath
+11.02[18:00:09]: module: deletePreviousWallpaper
+11.02[18:00:09]: module: todoListNotEmpty
+11.02[18:00:09]: STREAM b'IHDR' 16 13
+11.02[18:00:09]: STREAM b'IDAT' 41 65536
+11.02[18:00:09]: STREAM b'IHDR' 16 13
+11.02[18:00:09]: STREAM b'IDAT' 41 57519
+11.02[18:00:10]: module: updateWallpaper
+11.03[00:10:05]: makeTable.py: 
+11.03[00:10:07]: STREAM b'IHDR' 16 13
+11.03[00:10:07]: STREAM b'sRGB' 41 1
+11.03[00:10:07]: STREAM b'IDAT' 54 8192
+11.03[00:10:08]: makeWallpaper.py: 
+11.03[00:10:08]: module: getTablePath
+11.03[00:10:08]: module: deletePreviousWallpaper
+11.03[00:10:08]: module: todoListNotEmpty
+11.03[00:10:08]: STREAM b'IHDR' 16 13
+11.03[00:10:08]: STREAM b'IDAT' 41 65536
+11.03[00:10:08]: STREAM b'IHDR' 16 13
+11.03[00:10:08]: STREAM b'IDAT' 41 57519
+11.03[00:10:08]: module: updateWallpaper
+11.03[08:00:06]: makeTable.py: 
+11.03[08:00:07]: STREAM b'IHDR' 16 13
+11.03[08:00:07]: STREAM b'sRGB' 41 1
+11.03[08:00:07]: STREAM b'IDAT' 54 8192
+11.03[08:00:07]: makeWallpaper.py: 
+11.03[08:00:07]: module: getTablePath
+11.03[08:00:07]: module: deletePreviousWallpaper
+11.03[08:00:07]: module: todoListNotEmpty
+11.03[08:00:07]: STREAM b'IHDR' 16 13
+11.03[08:00:07]: STREAM b'IDAT' 41 65536
+11.03[08:00:07]: STREAM b'IHDR' 16 13
+11.03[08:00:07]: STREAM b'IDAT' 41 57519
+11.03[08:00:08]: module: updateWallpaper
+11.03[18:00:07]: makeTable.py: 
+11.03[18:00:10]: STREAM b'IHDR' 16 13
+11.03[18:00:10]: STREAM b'sRGB' 41 1
+11.03[18:00:10]: STREAM b'IDAT' 54 8192
+11.03[18:00:10]: makeWallpaper.py: 
+11.03[18:00:10]: module: getTablePath
+11.03[18:00:10]: module: deletePreviousWallpaper
+11.03[18:00:10]: module: todoListNotEmpty
+11.03[18:00:10]: STREAM b'IHDR' 16 13
+11.03[18:00:10]: STREAM b'IDAT' 41 65536
+11.03[18:00:10]: STREAM b'IHDR' 16 13
+11.03[18:00:10]: STREAM b'IDAT' 41 57519
+11.03[18:00:10]: module: updateWallpaper
+11.04[00:10:07]: makeTable.py: 
+11.04[00:10:08]: STREAM b'IHDR' 16 13
+11.04[00:10:08]: STREAM b'sRGB' 41 1
+11.04[00:10:08]: STREAM b'IDAT' 54 8192
+11.04[00:10:08]: makeWallpaper.py: 
+11.04[00:10:08]: module: getTablePath
+11.04[00:10:08]: module: deletePreviousWallpaper
+11.04[00:10:08]: module: todoListNotEmpty
+11.04[00:10:08]: STREAM b'IHDR' 16 13
+11.04[00:10:08]: STREAM b'IDAT' 41 65536
+11.04[00:10:08]: STREAM b'IHDR' 16 13
+11.04[00:10:08]: STREAM b'IDAT' 41 57519
+11.04[00:10:09]: module: updateWallpaper
+11.04[15:04:22]: makeTable.py: 
+11.04[15:04:23]: STREAM b'IHDR' 16 13
+11.04[15:04:23]: STREAM b'sRGB' 41 1
+11.04[15:04:23]: STREAM b'IDAT' 54 8192
+11.04[15:04:23]: makeWallpaper.py: 
+11.04[15:04:23]: module: getTablePath
+11.04[15:04:23]: module: deletePreviousWallpaper
+11.04[15:04:23]: module: todoListNotEmpty
+11.04[15:04:23]: STREAM b'IHDR' 16 13
+11.04[15:04:23]: STREAM b'IDAT' 41 65536
+11.04[15:04:23]: STREAM b'IHDR' 16 13
+11.04[15:04:23]: STREAM b'IDAT' 41 57519
+11.04[15:04:24]: module: updateWallpaper
+11.04[18:00:07]: makeTable.py: 
+11.04[18:00:09]: STREAM b'IHDR' 16 13
+11.04[18:00:09]: STREAM b'sRGB' 41 1
+11.04[18:00:09]: STREAM b'IDAT' 54 8192
+11.04[18:00:09]: makeWallpaper.py: 
+11.04[18:00:09]: module: getTablePath
+11.04[18:00:09]: module: deletePreviousWallpaper
+11.04[18:00:09]: module: todoListNotEmpty
+11.04[18:00:09]: STREAM b'IHDR' 16 13
+11.04[18:00:09]: STREAM b'IDAT' 41 65536
+11.04[18:00:09]: STREAM b'IHDR' 16 13
+11.04[18:00:09]: STREAM b'IDAT' 41 57519
+11.04[18:00:09]: module: updateWallpaper
+11.05[00:10:05]: makeTable.py: 
+11.05[00:10:07]: STREAM b'IHDR' 16 13
+11.05[00:10:07]: STREAM b'sRGB' 41 1
+11.05[00:10:07]: STREAM b'IDAT' 54 8192
+11.05[00:10:07]: makeWallpaper.py: 
+11.05[00:10:07]: module: getTablePath
+11.05[00:10:07]: module: deletePreviousWallpaper
+11.05[00:10:07]: module: todoListNotEmpty
+11.05[00:10:07]: STREAM b'IHDR' 16 13
+11.05[00:10:07]: STREAM b'IDAT' 41 65536
+11.05[00:10:07]: STREAM b'IHDR' 16 13
+11.05[00:10:07]: STREAM b'IDAT' 41 57519
+11.05[00:10:08]: module: updateWallpaper
+11.05[08:00:07]: makeTable.py: 
+11.05[08:00:09]: STREAM b'IHDR' 16 13
+11.05[08:00:09]: STREAM b'sRGB' 41 1
+11.05[08:00:09]: STREAM b'IDAT' 54 8192
+11.05[08:00:09]: makeWallpaper.py: 
+11.05[08:00:09]: module: getTablePath
+11.05[08:00:09]: module: deletePreviousWallpaper
+11.05[08:00:09]: module: todoListNotEmpty
+11.05[08:00:09]: STREAM b'IHDR' 16 13
+11.05[08:00:09]: STREAM b'IDAT' 41 65536
+11.05[08:00:09]: STREAM b'IHDR' 16 13
+11.05[08:00:09]: STREAM b'IDAT' 41 57519
+11.05[08:00:09]: module: updateWallpaper
+11.05[18:00:07]: makeTable.py: 
+11.05[18:00:08]: STREAM b'IHDR' 16 13
+11.05[18:00:08]: STREAM b'sRGB' 41 1
+11.05[18:00:08]: STREAM b'IDAT' 54 8192
+11.05[18:00:09]: makeWallpaper.py: 
+11.05[18:00:09]: module: getTablePath
+11.05[18:00:09]: module: deletePreviousWallpaper
+11.05[18:00:09]: module: todoListNotEmpty
+11.05[18:00:09]: STREAM b'IHDR' 16 13
+11.05[18:00:09]: STREAM b'IDAT' 41 65536
+11.05[18:00:09]: STREAM b'IHDR' 16 13
+11.05[18:00:09]: STREAM b'IDAT' 41 57519
+11.05[18:00:09]: module: updateWallpaper
+11.06[00:10:05]: makeTable.py: 
+11.06[00:10:06]: STREAM b'IHDR' 16 13
+11.06[00:10:06]: STREAM b'sRGB' 41 1
+11.06[00:10:06]: STREAM b'IDAT' 54 8192
+11.06[00:10:07]: makeWallpaper.py: 
+11.06[00:10:07]: module: getTablePath
+11.06[00:10:07]: module: deletePreviousWallpaper
+11.06[00:10:07]: module: todoListNotEmpty
+11.06[00:10:07]: STREAM b'IHDR' 16 13
+11.06[00:10:07]: STREAM b'IDAT' 41 65536
+11.06[00:10:07]: STREAM b'IHDR' 16 13
+11.06[00:10:07]: STREAM b'IDAT' 41 57519
+11.06[00:10:07]: module: updateWallpaper
