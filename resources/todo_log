@@ -244,3 +244,21 @@
 11.06[00:10:07]: STREAM b'IHDR' 16 13
 11.06[00:10:07]: STREAM b'IDAT' 41 57519
 11.06[00:10:07]: module: updateWallpaper
+11.06[00:59:09]: 
+
+makeTable.py: 
+11.06[00:59:10]: STREAM b'IHDR' 16 13
+11.06[00:59:10]: STREAM b'sRGB' 41 1
+11.06[00:59:10]: STREAM b'IDAT' 54 8192
+11.06[00:59:10]: 
+
+makeWallpaper.py: 
+11.06[00:59:10]: module: getTablePath
+11.06[00:59:10]: module: deletePreviousWallpaper
+11.06[00:59:10]: module: todoListNotEmpty
+11.06[00:59:10]: STREAM b'IHDR' 16 13
+11.06[00:59:10]: STREAM b'IDAT' 41 65536
+11.06[00:59:10]: STREAM b'IHDR' 16 13
+11.06[00:59:10]: STREAM b'IDAT' 41 57519
+11.06[00:59:11]: module: updateWallpaper
+11.06[00:59:11]: /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/images/ToDoWallpaper_005910.png

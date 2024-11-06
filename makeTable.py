@@ -11,7 +11,7 @@ from makeWallpaper import makeWallpaper
 
 
 def makeTable() -> None:
-    myLog('makeTable.py: ')
+    myLog('\n\nmakeTable.py: ')
         
     project_directory = path_dict['Project']
     images_directory = path_dict['images']

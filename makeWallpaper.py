@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw
 
 
 def makeWallpaper():
-    my_log('makeWallpaper.py: ')
+    my_log('\n\nmakeWallpaper.py: ')
 
     images_dir = path_dict['images']
     base_wallpaper_name = "Wallpaper.png"
@@ -158,6 +158,7 @@ def updateWallpaper(item_path: str) -> None:
     """
 
     my_log('module: updateWallpaper')
+    my_log(item_path)
     script = ('tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path))
     run(['osascript', '-e', script])
 

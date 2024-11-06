@@ -32,8 +32,8 @@
 			</dict>
 		</array>
 		<key>StandardErrorPath</key>
-		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.launchagent.err</string>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.err</string>
 		<key>StandardOutPath</key>
-		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.launchagent.out</string>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.out</string>
 	</dict>
 </plist>

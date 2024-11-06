@@ -13,7 +13,7 @@ from makeTable import makeTable
 
 def main(arg) -> None:
 
-    myLog('makeTasks.py: ')
+    myLog('\n\nmakeTasks.py: ')
     
     if len(arg) != 0:
         for item in arg:
