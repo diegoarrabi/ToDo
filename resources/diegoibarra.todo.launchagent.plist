@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Label</key>
+		<string>diegoibarra.todo.launchagent</string>
+		<key>Program</key>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/makeTable.py</string>
+		<key>RunAtLoad</key>
+        <true/>
+		<key>WorkingDirectory</key>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo</string>
+		<key>StartCalendarInterval</key>
+		<array>
+			<dict>
+				<key>Hour</key>
+				<integer>0</integer>
+				<key>Minute</key>
+				<integer>10</integer>
+			</dict>
+			<dict>
+				<key>Hour</key>
+				<integer>8</integer>
+				<key>Minute</key>
+				<integer>00</integer>
+			</dict>
+			<dict>
+				<key>Hour</key>
+				<integer>18</integer>
+				<key>Minute</key>
+				<integer>00</integer>
+			</dict>
+		</array>
+		<key>StandardErrorPath</key>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.launchagent.err</string>
+		<key>StandardOutPath</key>
+		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/resources/.cache/diegoibarra.todo.launchagent.out</string>
+	</dict>
+</plist>

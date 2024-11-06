@@ -6,3 +6,5 @@ resources/todo_log
 *.png
 TaskList.csv
 nohup.out
+resources/.cache/diegoibarra.todo.launchagent.err
+resources/.cache/diegoibarra.todo.launchagent.out
