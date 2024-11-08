@@ -1,11 +1,5 @@
-/.DS_Store
-/.python-version
-/__pycache__
-resources/todo.log
-resources/images
-*.png
+.DS_Store
+.python-version
+__pycache__
+resources/
 TaskList.csv
-nohup.out
-resources/.cache/diegoibarra.todo.err
-resources/.cache/diegoibarra.todo.out
-resources/images/table.png
