@@ -4,8 +4,11 @@
 	<dict>
 		<key>Label</key>
 		<string>diegoibarra.todo.launchagent</string>
-		<key>Program</key>
-		<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/makeTable.py</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>/Users/diegoibarra/Developer/1_myProjects/Apps/ToDo/makeTable.py</string>
+    		<string>launchctl</string>
+		</array>
 		<key>RunAtLoad</key>
         <true/>
 		<key>WorkingDirectory</key>
@@ -16,19 +19,7 @@
 				<key>Hour</key>
 				<integer>0</integer>
 				<key>Minute</key>
-				<integer>10</integer>
-			</dict>
-			<dict>
-				<key>Hour</key>
-				<integer>8</integer>
-				<key>Minute</key>
-				<integer>00</integer>
-			</dict>
-			<dict>
-				<key>Hour</key>
-				<integer>18</integer>
-				<key>Minute</key>
-				<integer>00</integer>
+				<integer>0</integer>
 			</dict>
 		</array>
 		<key>StandardErrorPath</key>

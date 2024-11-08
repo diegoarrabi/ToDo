@@ -1,15 +1,15 @@
-import sys
+# import sys
 
 from os import path, listdir
 from subprocess import run
 from config import path_dict, timeLabel, tableStyle
-from config import myLog as my_log
+from config import myLog
 
 from PIL import Image, ImageDraw
 
 
 def makeWallpaper():
-    my_log('\n\nmakeWallpaper.py: ')
+    myLog('__makeWallpaper.py__')
 
     images_dir = path_dict['images']
     base_wallpaper_name = "Wallpaper.png"
@@ -22,10 +22,9 @@ def makeWallpaper():
     deletePreviousWallpaper(images_dir)
 
     if table_path == "":
-        my_log('module: todoListEmpty')
         todoListEmpty(base_wallpaper_path, new_wallpaper_savepath)
     else:
-        my_log('module: todoListNotEmpty')
+        
         todoListNotEmpty(table_path, base_wallpaper_path, new_wallpaper_savepath)
 
     updateWallpaper(new_wallpaper_savepath)
@@ -44,7 +43,7 @@ def deletePreviousWallpaper(directory_path: str) -> None:
         directory_path (str): Main Image Directory Path
     """
 
-    my_log('module: deletePreviousWallpaper')
+    myLog('module: deletePreviousWallpaper')
     previous_wallpaper = [x for x in listdir(directory_path) if x.startswith("ToDoWallpaper_")]
     if len(previous_wallpaper) == 0:
         return
@@ -64,7 +63,7 @@ def getTablePath(directory_path: str) -> str:
         str: Full path to image of to-do list table OR empty string if to-do list is empty
     """
 
-    my_log('module: getTablePath')
+    myLog('module: getTablePath')
     table_image = [x for x in listdir(directory_path) if x.startswith("table")]
     if len(table_image) == 0:
         return ""
@@ -80,6 +79,7 @@ def todoListEmpty(stockwallpaper_path: str, savepath: str) -> None:
         stockwallpaper_path (str): Full path to Stock Wallpaper
         savepath (str): Full path to New Wallpaper
     """
+    myLog('module: todoListEmpty')
     wallpaper_py = Image.open(stockwallpaper_path)
     wallpaper_py.save(savepath, "png")
     wallpaper_py.close()
@@ -108,6 +108,7 @@ def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str)
         Returns:
             Image: Image Object; rounded rectangle
         """
+        myLog('module: makeRect')
         color_style = tableStyle()
         box_background = color_style['HeadColor']
         box_background = "#" + str(box_background)
@@ -116,7 +117,8 @@ def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str)
         draw_py = ImageDraw.Draw(box_py)
         draw_py.rounded_rectangle(((0, 0), (image_width, image_height)), 50, fill= box_background)
         return box_py
-
+    
+    myLog('module: todoListNotEmpty')
     table_image_py = Image.open(table_image_path)
     table_width = table_image_py.width
     table_height = table_image_py.height
@@ -157,9 +159,8 @@ def updateWallpaper(item_path: str) -> None:
         item_path (str): Full Path to image to use as wallpaper
     """
 
-    my_log('module: updateWallpaper')
-    my_log(item_path)
-    script = ('tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path))
+    myLog('module: updateWallpaper')
+    script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
     run(['osascript', '-e', script])
 
 

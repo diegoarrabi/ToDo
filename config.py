@@ -6,6 +6,30 @@ from subprocess import call
 from pathlib import Path
 import logging as log
 
+
+def myLog(msg: str) -> None:
+    """
+    logs data to file
+
+    Args:
+        msg (str): any string to be logged
+    """
+    log_name = 'todo.log'
+    log_file = path.join(path_dict['resources'], log_name)
+    
+    log.basicConfig(
+        filename=log_file,
+        level=log.INFO,
+        datefmt='%m.%d[%H:%M:%S]',
+        format=f'%(asctime)s: %(message)s'
+    )
+    if msg.startswith('module'):
+        msg = f'    {msg}'
+    elif 'DONE' in msg:
+        msg = f'{msg}\n\n'
+    log.info(msg)
+
+
 def pathDict() -> dict:
     """
     Using the main file as the source of the Project Directory, 
@@ -42,26 +66,6 @@ def csvTable(project_directory: str) -> str:
     else:
         _exit()
     
-
-
-def myLog(msg: str) -> None:
-    """
-    logs data to file
-
-    Args:
-        msg (str): any string to be logged
-    """
-    log_name = 'todo_log'
-    log_file = path.join(path_dict['resources'], log_name)
-    
-    log.basicConfig(
-        filename=log_file,
-        level=log.DEBUG,
-        datefmt='%m.%d[%H:%M:%S]',
-        format=f'%(asctime)s: %(message)10s'
-    )
-    log.debug(msg)
-
 
 def getDialog(msg='mew mew', stop=False) -> None:
 

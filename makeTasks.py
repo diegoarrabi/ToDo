@@ -1,19 +1,17 @@
 import sys
-import time
-
 import pandas as pd
 from os import path
-from subprocess import run
 from datetime import datetime
 
 from config import csv_path, path_dict, txt_doc_name, myLog, getDialog
-
 from makeTable import makeTable
 
+# ENTRY POINT FROM INPUTMENU
+# THIS SCRIPT ADDS/REMOVES TASKS
 
-def main(arg) -> None:
-
-    myLog('\n\nmakeTasks.py: ')
+def makeTasks(arg) -> None:
+    myLog('START FROM TERMINAL'.center(35, '-'))
+    myLog('__makeTasks.py__')
     
     if len(arg) != 0:
         for item in arg:
@@ -24,29 +22,7 @@ def main(arg) -> None:
             elif duedate_value == 'done':
                 taskComplete(task_info) 
     
-    """
-    for item in readTextFile(txt_doc_name, project_directory):
-        if item == "_skip":
-            break
-
-        task_info = item.split(" - ")
-        duedate_value = (task_info[1].strip()).lower()
-
-        if duedate_value != 'done':
-            taskAddEdit(task_info)
-        elif duedate_value == 'done':
-            taskComplete(task_info)
-    """
-    
-    makeTable()
-    myLog('----------------------------DONE----------------------------\n\n')
-    
-    '''
-    py_script = "makeTable.py"
-    script = path.join(project_directory, py_script)
-
-    run(['python3', script])
-    '''
+    makeTable('makeTasks')
 ############################################################################
 
 
@@ -61,7 +37,7 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
     Returns:
         list[str]: each line as a value 
     """
-
+    myLog('module: styleTable')
     txtfile_path = path.join(basedir, txtfile_name)
     with open(txtfile_path, "r+") as read_file:
         txt_data = read_file.readlines()
@@ -74,8 +50,10 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
 
 
 def taskAddEdit(assignment_info: list) -> None:
+    myLog('module: taskAddEdit')
 
     def getFullDate(item_info: list) -> datetime:
+        myLog('module: getFullDate')
         today_date = datetime.today()
         today_str = str(today_date.day)
         if len(today_str) < 2:
@@ -100,7 +78,7 @@ def taskAddEdit(assignment_info: list) -> None:
     DATE_FORMAT = '%Y-%m-%d'
     ASSIGNMENT_COL = 0
     DATE_COL = 1
-    assignment_length = len(df_todo.index)
+    all_assignments_count = len(df_todo.index)
     item_date = getFullDate(assignment_info).strftime(DATE_FORMAT)
 
     try:
@@ -109,18 +87,21 @@ def taskAddEdit(assignment_info: list) -> None:
         pass
 
     if isinstance(assignment_info[0], int):
+        myLog('module: taskAddEdit -- EDIT TASK')
         task_label = df_todo.loc[(assignment_info[0] - 1), ASSIGNMENT_COL]
         df_todo.loc[(assignment_info[0] - 1), DATE_COL] = item_date
         saveCSV(df_todo, DATE_COL, DATE_FORMAT)
         return
 
-    for _index in range(assignment_length):
+    for _index in range(all_assignments_count):
         task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
         if task_label == assignment_info[0].lower():
+            myLog('module: taskAddEdit -- EDIT TASK')
             df_todo.loc[_index, DATE_COL] = item_date
             saveCSV(df_todo, DATE_COL, DATE_FORMAT)
             break
-        elif _index == (assignment_length - 1):
+        elif _index == (all_assignments_count - 1):
+            myLog('module: taskAddEdit -- ADD TASK')
             new_task = pd.DataFrame([[assignment_info[0], item_date]], columns=df_todo.columns)
             df_todo = pd.concat([new_task, df_todo], ignore_index=True)
             saveCSV(df_todo, DATE_COL, DATE_FORMAT)
@@ -129,12 +110,12 @@ def taskAddEdit(assignment_info: list) -> None:
 
 
 def taskComplete(assignment_info: list) -> None:
-
+    myLog('module: taskComplete -- REMOVE TASK')
     df_todo = pd.read_csv(csv_path, header=None)
     DATE_FORMAT = '%Y-%m-%d'
     ASSIGNMENT_COL = 0
     DATE_COL = 1
-    assignment_length = len(df_todo.index)
+    all_assignments_count = len(df_todo.index)
 
     try:
         assignment_info[0] = int(assignment_info[0])
@@ -144,11 +125,10 @@ def taskComplete(assignment_info: list) -> None:
     if isinstance(assignment_info[0], int):
         task_label = df_todo.loc[(assignment_info[0] - 1), ASSIGNMENT_COL]
         df_todo.drop(assignment_info[0] - 1, inplace=True)
-        # myLog(f'DONE: {task_label}')
         saveCSV(df_todo, DATE_COL, DATE_FORMAT)
         return
 
-    for _index in range(assignment_length):
+    for _index in range(all_assignments_count):
         task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
         if task_label == assignment_info[0].lower():
             df_todo.drop(_index, inplace=True)
@@ -158,6 +138,7 @@ def taskComplete(assignment_info: list) -> None:
 
 
 def saveCSV(df_list, DATE_COL: int, DATE_FORMAT: str) -> None:
+    myLog('module: saveCSV')
     df_list[DATE_COL] = pd.to_datetime(df_list[DATE_COL], format=DATE_FORMAT)
     df_list = df_list.sort_values(by=DATE_COL)
     df_list = df_list.reset_index(drop=True)
@@ -166,4 +147,4 @@ def saveCSV(df_list, DATE_COL: int, DATE_FORMAT: str) -> None:
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    makeTasks(sys.argv[1:])

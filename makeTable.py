@@ -1,19 +1,24 @@
 #!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
 
+from sys import exit
+
+from sys import argv
 import pandas as pd
 from subprocess import run
 from os import path, listdir
 import dataframe_image as dfi
 from datetime import datetime, timedelta
 from config import path_dict, csv_path, day_limit, tableStyle, myLog
-
 from makeWallpaper import makeWallpaper
 
+# ENTRY POINT FOR LAUNCHDAEMON
+# CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
 
-def makeTable() -> None:
-    myLog('\n\nmakeTable.py: ')
+def makeTable(_from: str) -> None:
+    if _from == "launchctl":
+        myLog('START FROM LAUNCH DAEMON'.center(35, '-'))
+    myLog('__makeTable.py__')
         
-    project_directory = path_dict['Project']
     images_directory = path_dict['images']
 
     deletePreviousTable(images_directory)
@@ -58,17 +63,12 @@ def makeTable() -> None:
         dfi.export(df_styled, path.join(images_directory, 'table.png'), dpi=300)
     
     makeWallpaper()
-    '''
-    python_script = "makeWallpaper.py"
-    script = path.join(project_directory, python_script)
-    run(['python3', script])
-    '''
+    myLog('DONE'.center(35, "-"))
 ###########################################################################
 
 
-
 def deletePreviousTable(images_directory: str) -> None:
-    
+    myLog('module: deletePreviousTable')
     previous_table = [x for x in listdir(images_directory) if x.startswith("table")]
     if len(previous_table) == 0:
         return
@@ -78,6 +78,7 @@ def deletePreviousTable(images_directory: str) -> None:
 
 
 def styleTable(df, headerCol):
+    myLog('module: styleTable')
     cStyle = tableStyle()
     bPx = cStyle['brWidth']
     bCo = cStyle['brColor']
@@ -158,6 +159,7 @@ def styleTable(df, headerCol):
             del tempToday
     
     return styleList
+###########################################################################
 
 if __name__ == '__main__':
-    makeTable()
+    makeTable(argv[1])

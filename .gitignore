@@ -1,10 +1,11 @@
 /.DS_Store
 /.python-version
 /__pycache__
-resources/todo_log
-/resources/images
+resources/todo.log
+resources/images
 *.png
 TaskList.csv
 nohup.out
-resources/.cache/diegoibarra.todo.launchagent.err
-resources/.cache/diegoibarra.todo.launchagent.out
+resources/.cache/diegoibarra.todo.err
+resources/.cache/diegoibarra.todo.out
+resources/images/table.png
