@@ -13,6 +13,12 @@ function init() {
 
     cd /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo
 
+    echo "\n---------------------------">>resources/.cache/diegoibarra.todo.err
+    date +%m-%d>>resources/.cache/diegoibarra.todo.err
+
+    echo "\n---------------------------" >> resources/.cache/diegoibarra.todo.out
+    date +%m-%d >> resources/.cache/diegoibarra.todo.out
+
     ITEM_LIST=()
     LOOP=true
     HEIGHT=$(tput lines)
@@ -56,7 +62,7 @@ while $LOOP; do
     fi    
 done
 
-nohup python3 makeTasks.py $ITEM_LIST &
+nohup python3 makeTasks.py $ITEM_LIST >>resources/.cache/diegoibarra.todo.out 2>>resources/.cache/diegoibarra.todo.err &
 
 echo "\x1b[0m"
 exit

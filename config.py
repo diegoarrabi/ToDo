@@ -2,7 +2,7 @@ from os import path, listdir, remove
 from collections import defaultdict
 from sys import exit as _exit
 from datetime import datetime
-from subprocess import call
+from subprocess import call, run, Popen, PIPE
 from pathlib import Path
 import logging as log
 
@@ -28,6 +28,16 @@ def myLog(msg: str) -> None:
     elif 'DONE' in msg:
         msg = f'{msg}\n\n'
     log.info(msg)
+
+
+def copy2Clipboard(_text) -> None:
+    """
+    Copies the given text to the clipboard using the pbcopy command.
+
+    Args:
+        _text (str): The text to be copied to the clipboard.
+    """
+    run("pbcopy", text=True, input=str(_text))
 
 
 def pathDict() -> dict:
@@ -72,10 +82,10 @@ def getDialog(msg='mew mew', stop=False) -> None:
     def testDialog(message):
         message = runfromTerm(message)
         dIcon = "/Users/diegoibarra/Pictures/2. Icons/0. Icons/Python/pyLogo.png"
-        s1 = '-e set dText to "Code Run was Succesful \n\n%s"' % (message)
-        s2 = '-e set dTitle to ("Python Test")'
+        s1 = '-e set dText to "%s"' % (message)
+        s2 = '-e set dTitle to ("ToDo")'
         s3 = '-e set dIcon to POSIX file ("%s")' % (Path(dIcon))
-        s4 = '-e display dialog dText with title dTitle with icon dIcon buttons {"Awesome"} default button 1'
+        s4 = '-e display dialog dText with title dTitle with icon dIcon buttons {"Ok"} default button 1'
         call(['osascript', s1, s2, s3, s4])
 
     def runfromTerm(message):

@@ -1,9 +1,9 @@
 import sys
 import pandas as pd
 from os import path
-from datetime import datetime
+from datetime import datetime, timedelta
 
-from config import csv_path, path_dict, txt_doc_name, myLog, getDialog
+from config import csv_path, path_dict, txt_doc_name, myLog, getDialog, copy2Clipboard
 from makeTable import makeTable
 
 # ENTRY POINT FROM INPUTMENU
@@ -15,6 +15,7 @@ def makeTasks(arg) -> None:
     
     if len(arg) != 0:
         for _index, _item in enumerate(arg):
+            myLog(f'Item {_index + 1}: {_item}')
             task_info = _item.split(" - ")
             duedate_value = (task_info[1].strip()).lower()
             if duedate_value != 'done':
@@ -49,30 +50,52 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
 ############################################################################
 
 
-def taskAddEdit(assignment_info: list) -> None:
+def taskAddEdit(assignment_info: list[str]) -> None:
     myLog('module: taskAddEdit')
 
-    def getFullDate(item_info: list) -> datetime:
+    def invalidInput(item_info: list[str]) -> None:
+        """
+        If input is invalid, returns '05/25/1996' datetime. 
+        That datetime will act as an 'Invalid Input' and will skip the current input
+
+        """
+        item_string = ' - '.join(item_info)
+        copy2Clipboard(item_string)
+        getDialog(f'{str(item_string)}\nis invalid\n\nItem Copied to Clipboard')
+        myLog(f"{str(item_string)} NOT VALID")
+        return datetime(year= 1996, month= 5, day= 25)
+
+    def getFullDate(item_info: list[str]) -> datetime:
         myLog('module: getFullDate')
-        today_date = datetime.today()
+        today_date = datetime.today().replace(minute=0, second=0, microsecond=0)
         today_str = str(today_date.day)
         if len(today_str) < 2:
             today_str = '0' + today_str
         today_month = str(today_date.month)
         today_compare = int(today_month + today_str)
 
-        item_index = str(item_info[1]).split('/')
-        item_day = item_index[1]
-        if len(item_day) < 2:
-            item_day = '0' + item_day
-        item_month = item_index[0]
-        item_compare = int(item_month + item_day)
+        if item_info[1].isalpha():
+            if item_info[1].lower() in  ("today", "t"):
+                return today_date
+            if item_info[1].lower() == "tomorrow":
+                return (today_date + timedelta(days=1))
+            return invalidInput(item_info)
+        elif "/" in item_info[1]:
+            item_index = str(item_info[1]).split('/')
+            item_day = item_index[1]
+            if len(item_day) < 2:
+                item_day = f'0{item_day}'
+            item_month = item_index[0]
+            item_compare = int(f'{item_month}{item_day}')
 
-        if today_compare <= item_compare:
-            item_year = today_date.year
-        elif today_compare > item_compare:
-            item_year = (today_date.year + 1)
-        return datetime(int(item_year), int(item_month), int(item_day))
+            if today_compare <= item_compare:
+                item_year = today_date.year
+            elif today_compare > item_compare:
+                item_year = (today_date.year + 1)
+            return datetime(int(item_year), int(item_month), int(item_day))
+        else:
+            return invalidInput(item_info)
+            
 
     df_todo = pd.read_csv(csv_path, header=None)
     DATE_FORMAT = '%Y-%m-%d'
@@ -80,19 +103,17 @@ def taskAddEdit(assignment_info: list) -> None:
     DATE_COL = 1
     all_assignments_count = len(df_todo.index)
     item_date = getFullDate(assignment_info).strftime(DATE_FORMAT)
-
-    try:
-        assignment_info[0] = int(assignment_info[0])
-    except ValueError:
-        pass
-
-    if isinstance(assignment_info[0], int):
-        myLog('module: taskAddEdit -- EDIT TASK')
-        task_label = df_todo.loc[(assignment_info[0] - 1), ASSIGNMENT_COL]
-        df_todo.loc[(assignment_info[0] - 1), DATE_COL] = item_date
-        saveCSV(df_todo, DATE_COL, DATE_FORMAT)
+    if item_date == "1996-05-25":
         return
 
+    # USING AN INTEGER TO EDIT A TASK
+    if assignment_info[0].isdigit():
+    # if isinstance(assignment_info[0], int):
+        myLog('module: taskAddEdit -- EDIT TASK')
+        task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
+        df_todo.loc[(int(assignment_info[0]) - 1), DATE_COL] = item_date
+        saveCSV(df_todo, DATE_COL, DATE_FORMAT)
+        return
     for _index in range(all_assignments_count):
         task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
         if task_label == assignment_info[0].lower():
