@@ -1,11 +1,11 @@
 # import sys
 
-from os import path, listdir
 from subprocess import run
-from config import path_dict, timeLabel, tableStyle
-from config import myLog
-
+from os import path, listdir
 from PIL import Image, ImageDraw
+
+from config import path_dict, timeLabel, tableStyle, myLog
+
 
 
 def makeWallpaper():
@@ -28,9 +28,7 @@ def makeWallpaper():
         todoListNotEmpty(table_path, base_wallpaper_path, new_wallpaper_savepath)
 
     updateWallpaper(new_wallpaper_savepath)
-    
-
-# -------------------------------------------------------------------------------------------
+############################################################################    
 
 
 def deletePreviousWallpaper(directory_path: str) -> None:
@@ -49,6 +47,7 @@ def deletePreviousWallpaper(directory_path: str) -> None:
         return
     previous_path = path.join(directory_path, previous_wallpaper[0])
     run(["rm", "-f", previous_path])
+############################################################################
 
 
 def getTablePath(directory_path: str) -> str:
@@ -68,6 +67,7 @@ def getTablePath(directory_path: str) -> str:
     if len(table_image) == 0:
         return ""
     return path.join(directory_path, table_image[0])
+############################################################################
 
 
 def todoListEmpty(stockwallpaper_path: str, savepath: str) -> None:
@@ -83,6 +83,7 @@ def todoListEmpty(stockwallpaper_path: str, savepath: str) -> None:
     wallpaper_py = Image.open(stockwallpaper_path)
     wallpaper_py.save(savepath, "png")
     wallpaper_py.close()
+############################################################################
 
 
 def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str) -> None:
@@ -148,6 +149,7 @@ def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str)
 
     wallpaper_image_py.save(savepath, "png")
     wallpaper_image_py.close()
+############################################################################
 
 
 def updateWallpaper(item_path: str) -> None:
@@ -162,5 +164,5 @@ def updateWallpaper(item_path: str) -> None:
     myLog('module: updateWallpaper')
     script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
     run(['osascript', '-e', script])
-
+############################################################################
 

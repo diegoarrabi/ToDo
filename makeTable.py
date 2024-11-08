@@ -1,7 +1,5 @@
 #!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
 
-from sys import exit
-
 from sys import argv
 import pandas as pd
 from subprocess import run

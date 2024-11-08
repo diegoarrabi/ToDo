@@ -14,8 +14,8 @@ def makeTasks(arg) -> None:
     myLog('__makeTasks.py__')
     
     if len(arg) != 0:
-        for item in arg:
-            task_info = item.split(" - ")
+        for _index, _item in enumerate(arg):
+            task_info = _item.split(" - ")
             duedate_value = (task_info[1].strip()).lower()
             if duedate_value != 'done':
                 taskAddEdit(task_info)
