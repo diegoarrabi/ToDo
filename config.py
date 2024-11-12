@@ -1,8 +1,8 @@
+from subprocess import call, run #, Popen, PIPE
 from os import path, listdir, remove
 from collections import defaultdict
 from sys import exit as _exit
 from datetime import datetime
-from subprocess import call, run, Popen, PIPE
 from pathlib import Path
 import logging as log
 
@@ -14,8 +14,8 @@ def myLog(msg: str) -> None:
     Args:
         msg (str): any string to be logged
     """
-    log_name = 'todo.log'
-    log_file = path.join(path_dict['resources'], log_name)
+    log_name = 'diegoibarra.todo.log'
+    log_file = path.join(path_dict['resources'], 'cache', log_name)
     
     log.basicConfig(
         filename=log_file,

@@ -162,7 +162,13 @@ def updateWallpaper(item_path: str) -> None:
     """
 
     myLog('module: updateWallpaper')
+    myLog(f'Wallpaper Path: {item_path}')
     script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
-    run(['osascript', '-e', script])
+    osascript_result = run(['osascript', '-e', script], capture_output=True, text=True)
+    myLog(f"osascript STDOUT: {osascript_result.stdout}")
+    myLog(f"osascript STDERR: {osascript_result.stderr}")
+
+
+
 ############################################################################
 
