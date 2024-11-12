@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+
+
 function clearScreen() {
     # CLEAR SCREEN AND SET CURSOR ON TOP
     echo "\x1b[2J"
@@ -7,9 +9,10 @@ function clearScreen() {
 }
 
 function init() {
-    export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv" 
-    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" 
-    eval "$(pyenv init -)" 
+    # export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv" 
+    # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" 
+    # eval "$(pyenv init -)" 
+
 
     cd /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo
 
