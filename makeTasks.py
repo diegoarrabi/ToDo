@@ -29,7 +29,7 @@ def makeTasks(arg) -> None:
                 myLog(f'UNKNOWN INPUT: {_item}')
                 sys.exit()
     
-    # makeTable('makeTasks')
+    makeTable('makeTasks')
 ############################################################################
 
 
