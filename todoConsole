@@ -67,6 +67,6 @@ done
     
 nohup python3 makeTasks.py $ITEM_LIST >>resources/cache/diegoibarra.todo.out 2>>resources/cache/diegoibarra.todo.err &
 
-sleep 4
+sleep 1
 echo "\x1b[0m"
 exit
