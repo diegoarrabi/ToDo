@@ -16,14 +16,20 @@ def makeTasks(arg) -> None:
     if len(arg) != 0:
         for _index, _item in enumerate(arg):
             myLog(f'Item {_index + 1}: {_item}')
-            task_info = _item.split(" - ")
-            duedate_value = (task_info[1].strip()).lower()
-            if duedate_value != 'done':
-                taskAddEdit(task_info)
-            elif duedate_value == 'done':
-                taskComplete(task_info) 
+            if "-" in _item:
+                task_info = _item.split(" - ")
+                duedate_value = (task_info[1].strip()).lower()
+                if duedate_value != 'done':
+                    taskAddEdit(task_info)
+                elif duedate_value == 'done':
+                    taskComplete(task_info) 
+            elif "update" in _item:
+                print("UPDATE")
+            else:
+                myLog(f'UNKNOWN INPUT: {_item}')
+                sys.exit()
     
-    makeTable('makeTasks')
+    # makeTable('makeTasks')
 ############################################################################
 
 

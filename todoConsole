@@ -9,11 +9,7 @@ function clearScreen() {
 }
 
 function init() {
-    # export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv" 
-    # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" 
-    # eval "$(pyenv init -)" 
-
-
+    
     cd /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo
 
     echo "\n---------------------------">>resources/cache/diegoibarra.todo.err
@@ -51,21 +47,26 @@ function showTasks() {
 
 init
 
-while $LOOP; do
+while true; do
     read "INPUT?: "
-    # QUIT LOOP
-    if [[ "$INPUT" == "" ]]; then LOOP=false; fi
-    
-    # SHOW ALL ITEMS IN LIST FILE
-    if [[ "$INPUT" == "list" || "$INPUT" == "l" ]]; then showTasks; 
-    
-    # APPEND INPUT TO LIST
-    else
+    case "${INPUT}" in
+    "" | " " | "q" | "quit" | "-q" | "-quit" )
+        break
+    ;;
+    "list" | "l" | "-list" | "-l" )
+        showTasks;
+    ;;
+    "update" )
+        ITEM_LIST="update"
+    ;;
+    * )
         ITEM_LIST+=($INPUT)
-    fi    
+    ;;
+    esac
 done
-
+    
 nohup python3 makeTasks.py $ITEM_LIST >>resources/cache/diegoibarra.todo.out 2>>resources/cache/diegoibarra.todo.err &
 
+sleep 4
 echo "\x1b[0m"
 exit
