@@ -146,24 +146,21 @@ def tableStyle():
 
     cautionColor = "F86702"
     cStyle = {}
-    cStyle['fontHead'] = 'Manrope-SemiBold'
-    # cStyle['fontHead'] = 'JetBrainsMono-Light'
-    cStyle['fontBody'] = 'Mona Sans'
-    cStyle['fontHsize'] = 1.4
-    cStyle['fontBsize'] = 1.3
-    cStyle['brWidth'] = 4
+    cStyle['head_font'] = 'SF Pro Rounded'
+    cStyle['body_font'] = 'SF Mono'
+    cStyle['head_font_size'] = 1.2
+    cStyle['body_font_size'] = 1.3
+    cStyle['border_width'] = 4
 
-    cStyle['brColor'] = '202020'
-    # cStyle['brColor'] = '505658'
+    # BOX COLOR
+    cStyle['box_color'] = '353535'
 
-    cStyle['HeadColor'] = '202020'
-    # cStyle['HeadColor'] = '505658'
+    cStyle['head_font_color'] = '8E8E8E'
+    cStyle['body_font_color'] = 'E0E0E0'
+    cStyle['header_line_color'] = 'E2E2E2'
 
-    cStyle['hFntColor'] = 'E3E3E3'
-    cStyle['bFntColor'] = '272727'
-
-    cStyle['rowCoE'] = 'D7D7D8'  # / Dark
-    cStyle['rowCoO'] = 'F5F5F5'  # / Light
+    cStyle['rowCoE'] = '424242'  # / Dark
+    cStyle['rowCoO'] = '353535'  # / Light
     cStyle['pastCo'] = cautionColor  # / PastDue Color
     return cStyle
 

@@ -24,8 +24,7 @@ def makeWallpaper():
     if table_path == "":
         todoListEmpty(base_wallpaper_path, new_wallpaper_savepath)
     else:
-        
-        todoListNotEmpty(table_path, base_wallpaper_path, new_wallpaper_savepath)
+        createBoxTable(table_path, base_wallpaper_path, new_wallpaper_savepath)
 
     updateWallpaper(new_wallpaper_savepath)
 ############################################################################    
@@ -86,7 +85,7 @@ def todoListEmpty(stockwallpaper_path: str, savepath: str) -> None:
 ############################################################################
 
 
-def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str) -> None:
+def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -> None:
     """
     Pastes to-do list table image on top of a rounded rectangle image to appear as a border.
     Pastes the new bordered table image to the stock wallpaper and saves it with a unique timestamped name.
@@ -111,21 +110,27 @@ def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str)
         """
         myLog('module: makeRect')
         color_style = tableStyle()
-        box_background = color_style['HeadColor']
+        box_background = color_style['box_color']
         box_background = "#" + str(box_background)
+        corner_radius = 100
         
         box_py = Image.new('RGBA', (image_width, image_height))
         draw_py = ImageDraw.Draw(box_py)
-        draw_py.rounded_rectangle(((0, 0), (image_width, image_height)), 50, fill= box_background)
+        draw_py.rounded_rectangle(((0, 0), (image_width, image_height)), corner_radius, fill= box_background)
         return box_py
     
     myLog('module: todoListNotEmpty')
+    screen_x = 90
+    screen_y = 550
     table_image_py = Image.open(table_image_path)
     table_width = table_image_py.width
     table_height = table_image_py.height
-    width_ratio = (1+(4.75/100))
-    height_ratio = (1+(7/100))
-    top_shift_ratio = (20.5/100)
+    # width_ratio = (1+(4.75/100))
+    # height_ratio = (1+(7/100))
+    # top_shift_ratio = (20.5/100)
+    width_ratio = (1+(6/100))
+    height_ratio = (1+(20/100))
+    top_shift_ratio = (30/100)
     new_width = round(table_width * width_ratio)
     new_height = round(table_height * height_ratio)
     border_image_py = makeRect(new_width, new_height)
@@ -144,7 +149,7 @@ def todoListNotEmpty(table_image_path: str, stock_wallpaper: str, savepath: str)
     final_table_py = bordered_table_py.resize([new_table_width, new_table_height])
     bordered_table_py.close()
     _, _, _, mask = final_table_py.split()
-    wallpaper_image_py.paste(final_table_py, (40, 130), mask)
+    wallpaper_image_py.paste(final_table_py, (screen_x, screen_y), mask)
     final_table_py.close()
 
     wallpaper_image_py.save(savepath, "png")

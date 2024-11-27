@@ -21,7 +21,7 @@ def makeTable(_from: str) -> None:
 
     deletePreviousTable(images_directory)
 
-    HEADER = ['Tasks', 'Due Date', 'Days', '_Days']
+    HEADER = ['TASKS', 'DUE DATE', 'DAYS', '_Days']
     TASK_COL = HEADER[0]
     DATE_COL = HEADER[1]
     DAYS_COL = HEADER[3]
@@ -78,31 +78,33 @@ def deletePreviousTable(images_directory: str) -> None:
 def styleTable(df, headerCol):
     myLog('module: styleTable')
     cStyle = tableStyle()
-    bPx = cStyle['brWidth']
-    bCo = cStyle['brColor']
-    hFnt = cStyle['fontHead']
-    hSFnt = cStyle['fontHsize']
-    bFnt = cStyle['fontBody']
-    bSFnt = cStyle['fontBsize']
-    hCo = cStyle['HeadColor']
-    hFntCo = cStyle['hFntColor']
-    bFntCo = cStyle['bFntColor']
+    border_width = cStyle['border_width']
+
+    box_color = cStyle['box_color']
+
+    head_font = cStyle['head_font']
+    header_line_color = cStyle['header_line_color']
+    head_fontsize = cStyle['head_font_size']
+    body_font = cStyle['body_font']
+    body_fontsize = cStyle['body_font_size']
+    head_font_color = cStyle['head_font_color']
+    body_font_color = cStyle['body_font_color']
     rECo = cStyle['rowCoE']
     rOCo = cStyle['rowCoO']
 
     paddingHead = 'padding-top: %sem; padding-bottom: %sem;' % (0, 0)
-    propsHead = 'font-weight:normal; background-color: #%s; font-family: %s; color: #%s; font-size: %sem;' % (hCo, hFnt, hFntCo, hSFnt)
+    propsHead = f'font-weight:bold; background-color: #{box_color}; font-family: {head_font}; color: #{head_font_color}; font-size: {head_fontsize}em;'
 
     paddingBody = 'padding-top: %sem; padding-bottom: %sem;' % (0.3, 0.3)
-    paddingBodyL = 'padding-left: %sem; padding-top: %sem; padding-bottom: %sem;' % (1, 0.3, 0.3)
-    propsBodyE = 'font-weight:normal; background-color: #%s; font-family: %s; color: #%s; font-size: %sem;' % (rECo, bFnt, bFntCo, bSFnt)
-    propsBodyO = 'font-weight:normal; background-color: #%s; font-family: %s; color: #%s; font-size: %sem;' % (rOCo, bFnt, bFntCo, bSFnt)
+    paddingBodyL = 'padding-left: %sem; padding-top: %sem; padding-bottom: %sem;' % (0.5, 0.4, 0.4)
+    propsBodyE = f'font-weight:bold; background-color: #{rECo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;'
+    propsBodyO = f'font-weight:bold; background-color: #{rOCo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;'
 
-    bhBottom = 'border-bottom: %spx solid #%s;' % ((bPx-2), rECo)
-    bTop = 'border-top: %spx solid #%s;' % (bPx, bCo)
-    bRight = 'border-right: %spx solid #%s;' % (bPx, bCo)
-    bBottom = 'border-bottom: %spx solid #%s;' % (bPx, bCo)
-    bLeft = 'border-left: %spx solid #%s;' % (bPx, bCo)
+    bhBottom = f'border-bottom: {border_width-2}px solid #{header_line_color};'
+    bTop = f'border-top: {border_width}px solid #{box_color};'
+    bRight = f'border-right: {border_width}px solid #{box_color};'
+    bBottom = f'border-bottom: {border_width}px solid #{box_color};'
+    bLeft = f'border-left: {border_width}px solid #{box_color};'
 
     styleList = [
         # COLOR
