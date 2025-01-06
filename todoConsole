@@ -6,6 +6,7 @@ function clearScreen() {
     # CLEAR SCREEN AND SET CURSOR ON TOP
     echo "\x1b[2J"
     echo "\x1b[H"
+    echo "\x1b[3A"
 }
 
 function init() {
@@ -22,10 +23,12 @@ function init() {
     LOOP=true
     HEIGHT=$(tput lines)
     
-    # CHANGE FONT COLOR
-    echo "\x1b[38;5;202m"
-
     clearScreen
+    
+    # CHANGE FONT COLOR
+    echo "\x1b[1A\x1b[38;5;244m  Task     -     Date"
+    
+    echo "\x1b[1A\x1b[38;5;202m"
 }
 
 function showTasks() {
@@ -67,6 +70,5 @@ done
     
 nohup python3 makeTasks.py $ITEM_LIST >>resources/cache/diegoibarra.todo.out 2>>resources/cache/diegoibarra.todo.err &
 
-sleep 1
 echo "\x1b[0m"
 exit

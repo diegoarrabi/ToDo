@@ -1,5 +1,3 @@
-# import sys
-
 from subprocess import run
 from os import path, listdir
 from PIL import Image, ImageDraw
@@ -120,8 +118,8 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         return box_py
     
     myLog('module: todoListNotEmpty')
-    screen_x = 90
-    screen_y = 550
+    screen_x = 80
+    screen_y = 475
     table_image_py = Image.open(table_image_path)
     table_width = table_image_py.width
     table_height = table_image_py.height
@@ -170,9 +168,6 @@ def updateWallpaper(item_path: str) -> None:
     myLog(f'Wallpaper Path: {item_path}')
     script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
     osascript_result = run(['osascript', '-e', script], capture_output=True, text=True)
-    myLog(f"osascript STDOUT: {osascript_result.stdout}")
-    myLog(f"osascript STDERR: {osascript_result.stderr}")
-
 
 
 ############################################################################

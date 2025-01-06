@@ -1,10 +1,12 @@
 import sys
 import pandas as pd
 from os import path
+from subprocess import run
 from datetime import datetime, timedelta
 
 from config import csv_path, path_dict, txt_doc_name, myLog, getDialog, copy2Clipboard
 from makeTable import makeTable
+
 
 # ENTRY POINT FROM INPUTMENU
 # THIS SCRIPT ADDS/REMOVES TASKS
@@ -12,10 +14,10 @@ from makeTable import makeTable
 def makeTasks(arg) -> None:
     myLog('START FROM TERMINAL'.center(35, '-'))
     myLog('__makeTasks.py__')
-    
     if len(arg) != 0:
+        logAllTasks(arg)
         for _index, _item in enumerate(arg):
-            myLog(f'Item {_index + 1}: {_item}')
+            myLog(f'Item {_index + 1}: {_item.upper()}')
             if "-" in _item:
                 task_info = _item.split(" - ")
                 duedate_value = (task_info[1].strip()).lower()
@@ -30,7 +32,23 @@ def makeTasks(arg) -> None:
                 sys.exit()
     
     makeTable('makeTasks')
+    script_name = path.join(path_dict['resources'], "CloseTerminalWindow")
+    run([script_name])
+    
+
 ############################################################################
+
+
+def logAllTasks(task_list: list) -> None:
+    """
+    Logs all tasks at the beginning of the log message
+
+    Args:
+        task_list: (list): raw task info
+    """
+    for _count, _item in enumerate(task_list):
+        myLog(f"{" "*3}ITEM {_count}: {_item.upper()}")
+
 
 
 def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
@@ -44,7 +62,7 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
     Returns:
         list[str]: each line as a value 
     """
-    myLog('module: styleTable')
+    myLog('module: readTextFile')
     txtfile_path = path.join(basedir, txtfile_name)
     with open(txtfile_path, "r+") as read_file:
         txt_data = read_file.readlines()
@@ -114,7 +132,6 @@ def taskAddEdit(assignment_info: list[str]) -> None:
 
     # USING AN INTEGER TO EDIT A TASK
     if assignment_info[0].isdigit():
-    # if isinstance(assignment_info[0], int):
         myLog('module: taskAddEdit -- EDIT TASK')
         task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
         df_todo.loc[(int(assignment_info[0]) - 1), DATE_COL] = item_date
