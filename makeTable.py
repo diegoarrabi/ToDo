@@ -1,3 +1,6 @@
+#!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
+# required env for launchdaemon execution
+
 from sys import argv
 
 import pandas as pd
@@ -20,12 +23,13 @@ from config import day_limit
 from config import tableStyle
 from config import clearScreen
 
+from console2Background import console2Background
+
 from makeWallpaper import makeWallpaper
 ############################################################################
 
 
 def makeTable(_from= "makeTasks") -> None:
-
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
     clearScreen()
@@ -82,10 +86,12 @@ def makeTable(_from= "makeTasks") -> None:
         except Exception:
             myLog('DataFrame_Image Module Error', log.ERROR)
 
-
+    try:
+        console2Background()
+    except Exception:
+        myLog('console2Background.py Error', log.ERROR)
     makeWallpaper()
     myLog('-[ DONE ]-')
-    exit(print("Complete (:"))
 ###########################################################################
 ###########################################################################
 ###########################################################################
