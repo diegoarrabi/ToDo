@@ -8,10 +8,11 @@ certifi==2024.8.30
 charset-normalizer==3.4.0
 cssselect==1.2.0
 cssutils==2.11.1
-dataframe_image==0.2.6
+dataframe_image==0.2.7
 defusedxml==0.7.1
 fastjsonschema==2.20.0
 frozenlist==1.5.0
+greenlet==3.1.1
 html2image==2.0.5
 idna==3.10
 Jinja2==3.1.4
@@ -34,7 +35,9 @@ pandas==2.2.3
 pandocfilters==1.5.1
 pillow==11.0.0
 platformdirs==4.3.6
+playwright==1.50.0
 propcache==0.2.0
+pyee==12.1.1
 Pygments==2.18.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
@@ -47,6 +50,7 @@ soupsieve==2.6
 tinycss2==1.4.0
 tornado==6.4.1
 traitlets==5.14.3
+typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
 webencodings==0.5.1

@@ -1,10 +1,17 @@
+from os import path
+from os import listdir
+
+from PIL import Image
+from PIL import ImageDraw
+
 from subprocess import run
-from os import path, listdir
-from PIL import Image, ImageDraw
 
-from config import path_dict, timeLabel, tableStyle, myLog
-
-
+from config import log
+from config import myLog
+from config import path_dict
+from config import timeLabel
+from config import tableStyle
+############################################################################
 
 def makeWallpaper():
     myLog('__makeWallpaper.py__')
@@ -26,6 +33,8 @@ def makeWallpaper():
 
     updateWallpaper(new_wallpaper_savepath)
 ############################################################################    
+############################################################################    
+############################################################################    
 
 
 def deletePreviousWallpaper(directory_path: str) -> None:
@@ -38,7 +47,7 @@ def deletePreviousWallpaper(directory_path: str) -> None:
         directory_path (str): Main Image Directory Path
     """
 
-    myLog('module: deletePreviousWallpaper')
+    myLog('method: deletePreviousWallpaper')
     previous_wallpaper = [x for x in listdir(directory_path) if x.startswith("ToDoWallpaper_")]
     if len(previous_wallpaper) == 0:
         return
@@ -59,7 +68,7 @@ def getTablePath(directory_path: str) -> str:
         str: Full path to image of to-do list table OR empty string if to-do list is empty
     """
 
-    myLog('module: getTablePath')
+    myLog('method: getTablePath')
     table_image = [x for x in listdir(directory_path) if x.startswith("table")]
     if len(table_image) == 0:
         return ""
@@ -76,7 +85,7 @@ def todoListEmpty(stockwallpaper_path: str, savepath: str) -> None:
         stockwallpaper_path (str): Full path to Stock Wallpaper
         savepath (str): Full path to New Wallpaper
     """
-    myLog('module: todoListEmpty')
+    myLog('method: todoListEmpty')
     wallpaper_py = Image.open(stockwallpaper_path)
     wallpaper_py.save(savepath, "png")
     wallpaper_py.close()
@@ -106,7 +115,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         Returns:
             Image: Image Object; rounded rectangle
         """
-        myLog('module: makeRect')
+        myLog('method: makeRect [method: createBoxTable]')
         color_style = tableStyle()
         box_background = color_style['box_color']
         box_background = "#" + str(box_background)
@@ -117,7 +126,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         draw_py.rounded_rectangle(((0, 0), (image_width, image_height)), corner_radius, fill= box_background)
         return box_py
     
-    myLog('module: todoListNotEmpty')
+    myLog('method: createBoxTable')
     screen_x = 80
     screen_y = 475
     table_image_py = Image.open(table_image_path)
@@ -163,12 +172,12 @@ def updateWallpaper(item_path: str) -> None:
     Args:
         item_path (str): Full Path to image to use as wallpaper
     """
-
-    myLog('module: updateWallpaper')
-    myLog(f'Wallpaper Path: {item_path}')
+    myLog('method: updateWallpaper')
+    myLog(f'Wallpaper Path: {path.isfile(item_path)}')
     script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
-    osascript_result = run(['osascript', '-e', script], capture_output=True, text=True)
-
-
+    try:
+        run(['osascript', '-e', script], capture_output=True, text=True)
+    except Exception:
+        myLog('DataFrame_Image Module Error', log.ERROR)
 ############################################################################
 

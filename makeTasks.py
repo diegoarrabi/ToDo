@@ -1,19 +1,29 @@
-import sys
-import pandas as pd
 from os import path
-from subprocess import run
-from datetime import datetime, timedelta
 
-from config import csv_path, path_dict, txt_doc_name, myLog, getDialog, copy2Clipboard
+from sys import argv
+
+import pandas as pd
+
+from datetime import datetime
+from datetime import timedelta
+
+from config import log
+from config import myLog
+from config import csv_path
+from config import path_dict
+from config import getDialog
+from config import copy2Clipboard
+
 from makeTable import makeTable
+from console2Background import console2Background
+############################################################################
 
-
-# ENTRY POINT FROM INPUTMENU
-# THIS SCRIPT ADDS/REMOVES TASKS
 
 def makeTasks(arg) -> None:
-    myLog('START FROM TERMINAL'.center(35, '-'))
-    myLog('__makeTasks.py__')
+    # ENTRY POINT FROM INPUT-CONSOLE
+    # THIS SCRIPT ADDS/REMOVES TASKS
+    myLog('-[ TODO CONSOLE ]-')
+    myLog('__makeTasks.py__'.upper())
     if len(arg) != 0:
         logAllTasks(arg)
         for _index, _item in enumerate(arg):
@@ -24,18 +34,19 @@ def makeTasks(arg) -> None:
                 if duedate_value != 'done':
                     taskAddEdit(task_info)
                 elif duedate_value == 'done':
-                    taskComplete(task_info) 
+                    taskComplete(task_info)
             elif "update" in _item:
                 print("UPDATE")
             else:
-                myLog(f'UNKNOWN INPUT: {_item}')
-                sys.exit()
-    
-    makeTable('makeTasks')
-    script_name = path.join(path_dict['resources'], "CloseTerminalWindow")
-    run([script_name])
-    
+                myLog(f'UNKNOWN INPUT: {_item}', log.ERROR)
+    try:
+        console2Background()
+    except Exception:
+        myLog('console2Background.py Error', log.ERROR)
+    makeTable()
 
+############################################################################
+############################################################################
 ############################################################################
 
 
@@ -47,8 +58,8 @@ def logAllTasks(task_list: list) -> None:
         task_list: (list): raw task info
     """
     for _count, _item in enumerate(task_list):
-        myLog(f"{" "*3}ITEM {_count}: {_item.upper()}")
-
+        myLog(f'{" "*3}ITEM {_count}: {_item.upper()}')
+############################################################################
 
 
 def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
@@ -62,7 +73,7 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
     Returns:
         list[str]: each line as a value 
     """
-    myLog('module: readTextFile')
+    myLog('method: readTextFile')
     txtfile_path = path.join(basedir, txtfile_name)
     with open(txtfile_path, "r+") as read_file:
         txt_data = read_file.readlines()
@@ -75,7 +86,7 @@ def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
 
 
 def taskAddEdit(assignment_info: list[str]) -> None:
-    myLog('module: taskAddEdit')
+    myLog('method: taskAddEdit')
 
     def invalidInput(item_info: list[str]) -> None:
         """
@@ -87,10 +98,11 @@ def taskAddEdit(assignment_info: list[str]) -> None:
         copy2Clipboard(item_string)
         getDialog(f'{str(item_string)}\nis invalid\n\nItem Copied to Clipboard')
         myLog(f"{str(item_string)} NOT VALID")
-        return datetime(year= 1996, month= 5, day= 25)
+        return datetime(year=1996, month=5, day=25)
+    ############################################################################
 
     def getFullDate(item_info: list[str]) -> datetime:
-        myLog('module: getFullDate')
+        myLog('method: getFullDate')
         today_date = datetime.today().replace(minute=0, second=0, microsecond=0)
         today_str = str(today_date.day)
         if len(today_str) < 2:
@@ -99,7 +111,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
         today_compare = int(today_month + today_str)
 
         if item_info[1].isalpha():
-            if item_info[1].lower() in  ("today", "t"):
+            if item_info[1].lower() in ("today", "t"):
                 return today_date
             if item_info[1].lower() == "tomorrow":
                 return (today_date + timedelta(days=1))
@@ -119,7 +131,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
             return datetime(int(item_year), int(item_month), int(item_day))
         else:
             return invalidInput(item_info)
-            
+        ############################################################################
 
     df_todo = pd.read_csv(csv_path, header=None)
     DATE_FORMAT = '%Y-%m-%d'
@@ -132,7 +144,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
 
     # USING AN INTEGER TO EDIT A TASK
     if assignment_info[0].isdigit():
-        myLog('module: taskAddEdit -- EDIT TASK')
+        myLog('method: taskAddEdit -- EDIT TASK')
         task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
         df_todo.loc[(int(assignment_info[0]) - 1), DATE_COL] = item_date
         saveCSV(df_todo, DATE_COL, DATE_FORMAT)
@@ -140,12 +152,12 @@ def taskAddEdit(assignment_info: list[str]) -> None:
     for _index in range(all_assignments_count):
         task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
         if task_label == assignment_info[0].lower():
-            myLog('module: taskAddEdit -- EDIT TASK')
+            myLog('method: taskAddEdit -- EDIT TASK')
             df_todo.loc[_index, DATE_COL] = item_date
             saveCSV(df_todo, DATE_COL, DATE_FORMAT)
             break
         elif _index == (all_assignments_count - 1):
-            myLog('module: taskAddEdit -- ADD TASK')
+            myLog('method: taskAddEdit -- ADD TASK')
             new_task = pd.DataFrame([[assignment_info[0], item_date]], columns=df_todo.columns)
             df_todo = pd.concat([new_task, df_todo], ignore_index=True)
             saveCSV(df_todo, DATE_COL, DATE_FORMAT)
@@ -154,7 +166,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
 
 
 def taskComplete(assignment_info: list) -> None:
-    myLog('module: taskComplete -- REMOVE TASK')
+    myLog('method: taskComplete -- REMOVE TASK')
     df_todo = pd.read_csv(csv_path, header=None)
     DATE_FORMAT = '%Y-%m-%d'
     ASSIGNMENT_COL = 0
@@ -182,7 +194,7 @@ def taskComplete(assignment_info: list) -> None:
 
 
 def saveCSV(df_list, DATE_COL: int, DATE_FORMAT: str) -> None:
-    myLog('module: saveCSV')
+    myLog('method: saveCSV')
     df_list[DATE_COL] = pd.to_datetime(df_list[DATE_COL], format=DATE_FORMAT)
     df_list = df_list.sort_values(by=DATE_COL)
     df_list = df_list.reset_index(drop=True)
@@ -191,4 +203,4 @@ def saveCSV(df_list, DATE_COL: int, DATE_FORMAT: str) -> None:
 
 
 if __name__ == '__main__':
-    makeTasks(sys.argv[1:])
+    makeTasks(argv[1:])

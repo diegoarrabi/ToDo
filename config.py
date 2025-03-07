@@ -1,4 +1,4 @@
-from subprocess import call, run #, Popen, PIPE
+from subprocess import run
 from os import path, listdir, remove
 from collections import defaultdict
 from sys import exit as _exit
@@ -7,28 +7,94 @@ from pathlib import Path
 import logging as log
 
 
-def myLog(msg: str) -> None:
+# GLOBALS
+# CONFIG ONLY
+table_name = 'TaskList.csv'
+code_wrap = 150
+half_tab = 2
+
+# MAKETASKS.PY
+txt_doc_name = "TasksToDo.txt"
+
+# MAKETABLE.PY
+day_limit = 8
+
+
+class CustomLogFormatter(log.Formatter):
+    # DEBUG     -> 10
+    # INFO      -> 20
+    # ERROR     -> 40
+    # CRITICAL  -> 50
+
+    def __init__(self, fmt=None, datefmt="%m.%d[%H:%M:%S]", style="%", validate=True, *, defaults=None):
+        super().__init__(fmt, datefmt, style, validate, defaults=defaults)
+
+    def format(self, record):
+        # CODE START
+        if record.levelno == log.CRITICAL:
+            self._style._fmt = f'\n\n%(asctime)s: %(message)s'
+        # METHOD START
+        elif record.levelno == log.INFO:
+            self._style._fmt = f'%(asctime)s:\t└── %(message)s'
+        # ERROR DETECTED
+        elif record.levelno == log.ERROR:
+            self._style._fmt = f'%(message)s'
+        # ALL OTHER MESSAGES
+        else:
+            self._style._fmt = f'%(asctime)s: %(message)s'
+        return super().format(record)
+
+    def formatException(self, exception_info):
+        global code_wrap
+        global half_tab
+
+        result = (super().formatException(exception_info)).splitlines()
+        result_formatted_list = [f"{half_tab*' '}│{half_tab*' '}{strline}" for strline in result]
+        result_formatted_string = f"{' '*half_tab}{'─'*(code_wrap-half_tab)}\n{'\n'.join(result_formatted_list)}"
+        return result_formatted_string
+
+def myLog(message: str, log_level=log.DEBUG):
     """
     logs data to file
 
     Args:
-        msg (str): any string to be logged
+        message (str): any string to be logged
     """
     log_name = 'diegoibarra.todo.log'
     log_file = path.join(path_dict['resources'], 'cache', log_name)
-    
-    log.basicConfig(
-        filename=log_file,
-        level=log.INFO,
-        datefmt='%m.%d[%H:%M:%S]',
-        format=f'%(asctime)s: %(message)s'
-    )
-    if msg.startswith('module'):
-        msg = f'    {msg}'
-    elif 'DONE' in msg:
-        msg = f'{msg}\n\n'
-    log.info(msg)
 
+    my_handler = log.FileHandler(log_file)
+    my_handler.setFormatter(CustomLogFormatter())
+
+    my_logger = log.getLogger('myLogger')
+    my_logger.setLevel(log.DEBUG)
+    my_logger.addHandler(my_handler)
+
+    # CODE START
+    if message.lower().startswith('-') and (not "done" in message.lower()):
+        message = message.center(35, '-')
+        my_logger.critical(message)
+    # METHOD START
+    elif message.lower().startswith('method'):
+        my_logger.info(message)
+    # ERROR DETECTED
+    elif log_level == log.ERROR:
+        log_message = f"ERROR: {message}"
+        my_logger.error(log_message, exc_info=True)
+        getDialog(log_file, message)
+    # SCRIPT END
+    elif "done" in message.lower():
+        message = message.center(35, '-')
+        my_logger.debug(message)
+    # ALL OTHER MESSAGES
+    else:
+        my_logger.debug(message)
+
+    my_logger.removeHandler(my_handler)
+    my_handler.close()
+
+def clearScreen() -> None:
+    print("\x1b[H\x1b[J")
 
 def copy2Clipboard(_text) -> None:
     """
@@ -38,7 +104,6 @@ def copy2Clipboard(_text) -> None:
         _text (str): The text to be copied to the clipboard.
     """
     run("pbcopy", text=True, input=str(_text))
-
 
 def pathDict() -> dict:
     """
@@ -54,11 +119,10 @@ def pathDict() -> dict:
     base_directory = path.dirname(__file__)
     key_list = ['Project', 'resources', 'images']
     path_dict = defaultdict(str)
-    path_dict[key_list[0]] = base_directory # Project Directory
+    path_dict[key_list[0]] = base_directory  # Project Directory
     path_dict[key_list[1]] = path.join(base_directory, 'resources')
     path_dict[key_list[2]] = path.join(path_dict[key_list[1]], 'images')
     return path_dict
-
 
 def csvTable(project_directory: str) -> str:
     """
@@ -70,33 +134,46 @@ def csvTable(project_directory: str) -> str:
     Returns:
         str: path of csv file
     """
+    global table_name
+
     wb_path = path.join(project_directory, table_name)
     if path.isfile(wb_path):
         return wb_path
     else:
         _exit()
+
+def getDialog(log_file: str, message='') -> None:
+
+    def runScript(applescript: str) -> str:
+
+        std_outerr = run(['osascript', '-e', applescript], capture_output=True, text=True)
+        stdout = std_outerr.stdout.strip()
+        return stdout
     
+    applescript = """
+    set dialog_message to "%s\n\n\tOpen ToDo.log in VSCode?"
+    set buttons_list to {"Open", "Nah"}
+    set default_button to (item 2 of buttons_list)
+    set title_message to "ToDo [ ERROR ]"
+    set dialog_icon to POSIX file "/Users/diegoibarra/Pictures/1. Icons/0. Icons/MyApps/ToDo/AppIcon.icns"
+    set time_out to 4
 
-def getDialog(msg='mew mew', stop=False) -> None:
+    display dialog dialog_message ¬
+    	with title title_message ¬
+	    buttons buttons_list ¬
+	    default button default_button ¬
+	    with icon dialog_icon ¬
+	    giving up after time_out
+    
+    """ % (message)
 
-    def testDialog(message):
-        message = runfromTerm(message)
-        dIcon = "/Users/diegoibarra/Pictures/2. Icons/0. Icons/Python/pyLogo.png"
-        s1 = '-e set dText to "%s"' % (message)
-        s2 = '-e set dTitle to ("ToDo")'
-        s3 = '-e set dIcon to POSIX file ("%s")' % (Path(dIcon))
-        s4 = '-e display dialog dText with title dTitle with icon dIcon buttons {"Ok"} default button 1'
-        call(['osascript', s1, s2, s3, s4])
-
-    def runfromTerm(message):
-        if len(message) == 0:
-            message = 'mew'
-        return message
-
-    testDialog(msg)
-
-    if stop == True:
-        _exit()
+    stdout = runScript(applescript)
+    # button returned:Nah, gave up:false
+    stdout_parse = stdout.split(', ')
+    user_response = stdout_parse[0].split(':')
+    if user_response[1].lower() == 'open':
+        run(['code', path_dict['Project'], log_file])
+    exit()
 
 
 def clearFolder(directory: str) -> None:
@@ -165,23 +242,6 @@ def tableStyle():
     return cStyle
 
 
-## Config ONLY
-table_name = 'TaskList.csv'
-
-
-## MakeAssignments
-txt_doc_name = "TasksToDo.txt"
-#// notifications_on = False
-
-
-## MakeTable
-day_limit = 8
-
-
-## MakeWallpaper
-
-
-## MakeAssignments & MakeTable
+# MakeAssignments & MakeTable
 path_dict = pathDict()
 csv_path = csvTable(path_dict['Project'])
-

@@ -1,22 +1,40 @@
-#!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
-
 from sys import argv
+
 import pandas as pd
+
+from os import path
+from os import listdir
+
 from subprocess import run
-from os import path, listdir
+
+from datetime import datetime
+from datetime import timedelta
+
 import dataframe_image as dfi
-from datetime import datetime, timedelta
-from config import path_dict, csv_path, day_limit, tableStyle, myLog
+
+from config import log
+from config import myLog
+from config import csv_path
+from config import path_dict
+from config import day_limit
+from config import tableStyle
+from config import clearScreen
+
 from makeWallpaper import makeWallpaper
+############################################################################
 
-# ENTRY POINT FOR LAUNCHDAEMON
-# CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
 
-def makeTable(_from: str) -> None:
+def makeTable(_from= "makeTasks") -> None:
+
+    # ENTRY POINT FOR LAUNCHDAEMON
+    # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
+    clearScreen()
     if _from == "launchctl":
-        myLog('START FROM LAUNCH DAEMON'.center(35, '-'))
-    myLog('__makeTable.py__')
-        
+        myLog('-[ LAUNCH DAEMON ]-')
+    elif _from == "vscode":
+        myLog('-[ VSCODE DEBUG ]-')
+    myLog('__makeTable.py__'.upper())
+
     images_directory = path_dict['images']
 
     deletePreviousTable(images_directory)
@@ -37,9 +55,9 @@ def makeTable(_from: str) -> None:
     df_todo[DAY_STR_COL] = ""
     df_todo[DAYS_COL] = (df_todo[DATE_COL] - time_now)
     df_todo[DATE_COL] = df_todo[DATE_COL].dt.strftime('%m/%d')
-    
+
     df_soon = df_todo[df_todo[DAYS_COL] < dt_day_limit]
-    
+
     if not df_soon.empty:
         for _row in range(len(df_soon.index)):
             days_left = df_soon.loc[_row, DAYS_COL].days
@@ -56,17 +74,24 @@ def makeTable(_from: str) -> None:
                 df_soon.loc[_row, DAY_STR_COL] = 'Tomorrow'
             elif days_left > 1:
                 df_soon.loc[_row, DAY_STR_COL] = f'{days_left} Days'
-    
+
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
-        dfi.export(df_styled, path.join(images_directory, 'table.png'), dpi=300)
-    
+
+        try:
+            dfi.export(df_styled, path.join(images_directory, 'table.png'), dpi=300)
+        except Exception:
+            myLog('DataFrame_Image Module Error', log.ERROR)
+
+
     makeWallpaper()
-    myLog('DONE'.center(35, "-"))
+    myLog('-[ DONE ]-')
+    exit(print("Complete (:"))
+###########################################################################
+###########################################################################
 ###########################################################################
 
-
 def deletePreviousTable(images_directory: str) -> None:
-    myLog('module: deletePreviousTable')
+    myLog('method: deletePreviousTable')
     previous_table = [x for x in listdir(images_directory) if x.startswith("table")]
     if len(previous_table) == 0:
         return
@@ -74,9 +99,8 @@ def deletePreviousTable(images_directory: str) -> None:
     run(["rm", "-f", previous_path])
 ###########################################################################
 
-
 def styleTable(df, headerCol):
-    myLog('module: styleTable')
+    myLog('method: styleTable')
     cStyle = tableStyle()
     border_width = cStyle['border_width']
 
@@ -144,11 +168,11 @@ def styleTable(df, headerCol):
         {"selector": "tbody tr:nth-last-child(1)",
             "props": f"text-align: right; {paddingBody}; {bBottom}"},
     ]
-    
-    lengthofToday = len(df[df[headerCol[2]].str.contains("!")])
 
-    if lengthofToday > 0:
-        for i in range(lengthofToday):
+    today_length = len(df[df[headerCol[2]].str.contains("!")])
+
+    if today_length > 0:
+        for i in range(today_length):
             tempToday = {}
             dict_keys = ['selector', 'props']
             tempToday[dict_keys[0]] = ""
@@ -157,9 +181,12 @@ def styleTable(df, headerCol):
             tempToday['selector'] = (f"tbody tr:nth-child({i+1})")
             styleList.append(tempToday)
             del tempToday
-    
+
     return styleList
 ###########################################################################
 
+
 if __name__ == '__main__':
+    if len(argv) == 1:
+        argv.append("vscode")
     makeTable(argv[1])
