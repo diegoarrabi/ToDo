@@ -142,7 +142,7 @@ def csvTable(project_directory: str) -> str:
     else:
         _exit()
 
-def getDialog(log_file: str, message='') -> None:
+def getDialog(log_file='', message='') -> None:
 
     def runScript(applescript: str) -> str:
 

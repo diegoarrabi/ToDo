@@ -58,26 +58,26 @@ def logAllTasks(task_list: list) -> None:
 ############################################################################
 
 
-def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
-    """
-    Reads Assignment text file and returns a list of each line (stripped of whitespaces)
+# def readTextFile(txtfile_name: str, basedir: str) -> list[str]:
+#     """
+#     Reads Assignment text file and returns a list of each line (stripped of whitespaces)
 
-    Args:
-        txtfile_name (str): name of text file
-        txtfile_path (str): path of parent folder
+#     Args:
+#         txtfile_name (str): name of text file
+#         txtfile_path (str): path of parent folder
 
-    Returns:
-        list[str]: each line as a value 
-    """
-    myLog('method: readTextFile')
-    txtfile_path = path.join(basedir, txtfile_name)
-    with open(txtfile_path, "r+") as read_file:
-        txt_data = read_file.readlines()
-        txt_data = [x.strip() for x in txt_data]
-        read_file.truncate(0)
-        if len(txt_data) == 0:
-            txt_data = ["_skip"]
-    return txt_data
+#     Returns:
+#         list[str]: each line as a value 
+#     """
+#     myLog('method: readTextFile')
+#     txtfile_path = path.join(basedir, txtfile_name)
+#     with open(txtfile_path, "r+") as read_file:
+#         txt_data = read_file.readlines()
+#         txt_data = [x.strip() for x in txt_data]
+#         read_file.truncate(0)
+#         if len(txt_data) == 0:
+#             txt_data = ["_skip"]
+#     return txt_data
 ############################################################################
 
 

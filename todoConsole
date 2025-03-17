@@ -12,6 +12,7 @@ function consoleSetUp() {
     cd $SCRIPT_DIR
     PYTHON_VENV="/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python"
     ITEM_LIST=()
+    PYTHON_SCRIPT=""
     HEIGHT=$(tput lines)
     
     clearScreen
@@ -63,15 +64,16 @@ while true; do
         fi
     ;;
     "update" )
-        ITEM_LIST="update"
+        PYTHON_SCRIPT="makeUpdate.py"
     ;;
     * )
         ITEM_LIST+=($INPUT)
+        PYTHON_SCRIPT="makeTasks.py"
     ;;
     esac
 done
     
-nohup $PYTHON_VENV makeTasks.py $ITEM_LIST > /dev/null 2>&1 &
+nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 nohup $PYTHON_VENV console2Background.py > /dev/null 2>&1 &
 echo "\x1b[0m"
 exit
