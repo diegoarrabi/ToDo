@@ -23,8 +23,6 @@ from config import day_limit
 from config import tableStyle
 from config import clearScreen
 
-from console2Background import console2Background
-
 from makeWallpaper import makeWallpaper
 ############################################################################
 
@@ -85,11 +83,6 @@ def makeTable(_from= "makeTasks") -> None:
             dfi.export(df_styled, path.join(images_directory, 'table.png'), dpi=300)
         except Exception:
             myLog('DataFrame_Image Module Error', log.ERROR)
-
-    try:
-        console2Background()
-    except Exception:
-        myLog('console2Background.py Error', log.ERROR)
     makeWallpaper()
     myLog('-[ DONE ]-')
 ###########################################################################

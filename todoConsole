@@ -1,28 +1,33 @@
 #!/bin/zsh
 
-function clearScreen() {
-    # CLEAR SCREEN AND SET CURSOR ON TOP
-    echo "\x1b[2J"
-    echo "\x1b[H"
-    echo "\x1b[3A"
-}
-############################################################################
+# ▗▄▄▄▖▗▖ ▗▖▗▖  ▗▖ ▗▄▄▖▗▄▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖ ▗▄▄▖
+# ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌     █    █  ▐▌ ▐▌▐▛▚▖▐▌▐▌   
+# ▐▛▀▀▘▐▌ ▐▌▐▌ ▝▜▌▐▌     █    █  ▐▌ ▐▌▐▌ ▝▜▌ ▝▀▚▖
+# ▐▌   ▝▚▄▞▘▐▌  ▐▌▝▚▄▄▖  █  ▗▄█▄▖▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘
+# ##########################################################################
 
-function init() {
-    cd /Users/diegoibarra/Developer/1_myProjects/Apps/ToDo
-
+function consoleSetUp() {
+    EXE_PATH="$1"
+    SCRIPT_DIR=$(dirname $EXE_PATH)
+    cd $SCRIPT_DIR
+    PYTHON_VENV="/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python"
     ITEM_LIST=()
-    LOOP=true
     HEIGHT=$(tput lines)
     
     clearScreen
     
     # CHANGE FONT COLOR
     echo "\x1b[1A\x1b[38;5;244m  Task     -     Date"
-    
     echo "\x1b[1A\x1b[38;5;202m"
-}
-############################################################################
+
+} ###############################################
+
+function clearScreen() {
+    # CLEAR SCREEN AND SET CURSOR ON TOP
+    echo "\x1b[2J"
+    echo "\x1b[H"
+    echo "\x1b[3A"
+} ###############################################
 
 function showTasks() {
     clearScreen
@@ -30,18 +35,19 @@ function showTasks() {
     echo $task_str
     echo "\x1b[${HEIGHT}B"
     read -q "CONTINUE?Continue? (enter: no; y: yes): "
-    if [[ "$CONTINUE" == "y" ]]; then 
-        clearScreen
-    fi
-    if [[ "$CONTINUE" == "n" ]]; then 
-        clearScreen
-        exit
-    fi
-}
-############################################################################
+    clearScreen
+    
+} ###############################################
 
 
-init
+#  ▗▄▄▖▗▄▄▄▖▗▄▖ ▗▄▄▖▗▄▄▄▖
+# ▐▌     █ ▐▌ ▐▌▐▌ ▐▌ █  
+#  ▝▀▚▖  █ ▐▛▀▜▌▐▛▀▚▖ █  
+# ▗▄▄▞▘  █ ▐▌ ▐▌▐▌ ▐▌ █
+# ##########################################################################
+
+consoleSetUp $0
+
 while true; do
     read "INPUT?: "
     case "${INPUT}" in
@@ -50,6 +56,11 @@ while true; do
     ;;
     "list" | "l" | "-list" | "-l" )
         showTasks;
+        if [ $CONTINUE = "y" ]; then
+            consoleSetUp $EXE_PATH
+        else
+            break
+        fi
     ;;
     "update" )
         ITEM_LIST="update"
@@ -60,11 +71,8 @@ while true; do
     esac
 done
     
-# nohup python3 makeTasks.py $ITEM_LIST >>resources/cache/diegoibarra.todo.out 2>>resources/cache/diegoibarra.todo.err &
-
-python_venv="/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python"
-nohup $python_venv makeTasks.py $ITEM_LIST > /dev/null 2>&1 &
-
+nohup $PYTHON_VENV makeTasks.py $ITEM_LIST > /dev/null 2>&1 &
+nohup $PYTHON_VENV console2Background.py > /dev/null 2>&1 &
 echo "\x1b[0m"
 exit
 ############################################################################

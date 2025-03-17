@@ -15,13 +15,13 @@ from config import getDialog
 from config import copy2Clipboard
 
 from makeTable import makeTable
-from console2Background import console2Background
 ############################################################################
 
 
 def makeTasks(arg) -> None:
     # ENTRY POINT FROM INPUT-CONSOLE
     # THIS SCRIPT ADDS/REMOVES TASKS
+
     myLog('-[ TODO CONSOLE ]-')
     myLog('__makeTasks.py__'.upper())
     if len(arg) != 0:
@@ -39,10 +39,6 @@ def makeTasks(arg) -> None:
                 print("UPDATE")
             else:
                 myLog(f'UNKNOWN INPUT: {_item}', log.ERROR)
-    try:
-        console2Background()
-    except Exception:
-        myLog('console2Background.py Error', log.ERROR)
     makeTable()
 
 ############################################################################

@@ -4,12 +4,14 @@ from config import log
 from config import myLog
 ############################################################################
 
+
 def runscript(script):
     process = run(['osascript', '-e', script], capture_output=True, text=True)
     stdout = (process.stdout).strip()
     stderr = (process.stderr).strip()
     return (stdout, stderr)
 ############################################################################
+
 
 def console2Background():
     applescript_string = """
@@ -18,7 +20,7 @@ def console2Background():
         set console_name to "todoConsole"
 
         -- Checks to see if Terminal was already open prior to running script
-        tell application "System Events" to set is_running to(name of processes) contains app_name
+        tell application "System Events" to set is_running to (name of processes) contains app_name
 
         if is_running then
             set quit_terminal to false
@@ -30,18 +32,18 @@ def console2Background():
 
             set window_list to every window
 
-            repeat with i from 1 to(count window_list)
+            repeat with i from 1 to (count window_list)
                 set window_object to item i of window_list
-                set window_title to(name of window_object)
+                set window_title to (name of window_object)
 
-                if window_title contains(word 1 of console_name) then
-                    delay 1
+                if window_title contains (word 1 of console_name) then
+                    --delay 1
                     close window_object
                 end if
             end repeat
             
             if quit_terminal then
-                delay 5
+                delay 1
                 quit
             end if
         end tell
@@ -56,6 +58,7 @@ def console2Background():
 ############################################################################
 ############################################################################
 ############################################################################
+
 
 if __name__ == '__main__':
     console2Background()
