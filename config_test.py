@@ -25,7 +25,15 @@ class CustomLogFormatter(log.Formatter):
     # ERROR     -> 40
     # CRITICAL  -> 50
 
-    def __init__(self, fmt=None, datefmt="%m.%d[%H:%M:%S]", style="%", validate=True, *, defaults=None):
+    def __init__(
+        self,
+        fmt=None,
+        datefmt="%m.%d[%H:%M:%S]",
+        style="%",
+        validate=True,
+        *,
+        defaults=None,
+    ):
         super().__init__(fmt, datefmt, style, validate, defaults=defaults)
 
     def format(self, record):
