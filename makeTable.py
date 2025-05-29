@@ -114,8 +114,8 @@ def styleTable(df, headerCol):
 
     paddingBody = "padding-top: %sem; padding-bottom: %sem;" % (0.3, 0.3)
     paddingBodyL = "padding-left: %sem; padding-top: %sem; padding-bottom: %sem;" % (0.5, 0.4, 0.4)
-    propsBodyE = f"font-weight:bold; background-color: #{rECo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
-    propsBodyO = f"font-weight:bold; background-color: #{rOCo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
+    propsBodyE = f"font-weight:normal; background-color: #{rECo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
+    propsBodyO = f"font-weight:normal; background-color: #{rOCo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
 
     bhBottom = f"border-bottom: {border_width - 2}px solid #{header_line_color};"
     bTop = f"border-top: {border_width}px solid #{box_color};"
@@ -129,7 +129,7 @@ def styleTable(df, headerCol):
         {"selector": "tbody tr:nth-child(even)", "props": f"{propsBodyE};"},
         {"selector": "tbody tr:nth-child(odd)", "props": f"{propsBodyO};"},
         # ALIGNMENT
-        {"selector": "th.col0", "props": f"text-align: left;{bLeft}; {paddingBodyL};"},
+        {"selector": "th.col0", "props": f"text-align: left;{bLeft}; {paddingBodyL}; min-width: 450px;"},
         {"selector": "td.col0", "props": f"text-align: left; {paddingBodyL}; {bLeft};"},
         {"selector": "th.col1", "props": "text-align: center;"},
         {"selector": "td.col1", "props": f"text-align: center; {paddingBody}"},
@@ -141,13 +141,21 @@ def styleTable(df, headerCol):
     ]
 
     today_length = len(df[df[headerCol[2]].str.contains("!")])
+    priority_length = len(df[df[headerCol[0]].str.contains("!")])
 
     if today_length > 0:
         for i in range(today_length):
             tempToday = {}
             dict_keys = ["selector", "props"]
             tempToday[dict_keys[0]] = ""
-            tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
+            if priority_length != 0:
+                tempToday[dict_keys[1]] = "\
+                    text-decoration: underline solid 0.15em #%s; \
+                    font-weight: bold; \
+                    color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
+                priority_length -= 1
+            else:
+                tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
             tempToday["selector"] = f"tbody tr:nth-child({i + 1})"
             styleList.append(tempToday)
             del tempToday

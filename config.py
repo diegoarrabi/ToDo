@@ -8,15 +8,20 @@ from sys import exit as _exit
 
 # GLOBALS
 # CONFIG ONLY
-table_name = "TaskList.csv"
+DEBUG=False
+if DEBUG:
+    table_name = "TESTLIST.csv"
+else:
+    table_name = "TaskList.csv"
 code_wrap = 150
 half_tab = 2
 
-# MAKETASKS.PY
-txt_doc_name = "TasksToDo.txt"
+# # MAKETASKS.PY
+# txt_doc_name = "TasksToDo.txt"
 
 # MAKETABLE.PY
 day_limit = 8
+
 
 
 class CustomLogFormatter(log.Formatter):
@@ -230,6 +235,7 @@ def timeLabel(prefix="") -> str:
 
 def tableStyle():
     cautionColor = "F86702"
+    priorityColor = "FB3819"
     cStyle = {}
     cStyle["head_font"] = "SF Pro Rounded"
     cStyle["body_font"] = "SF Mono"
@@ -247,6 +253,7 @@ def tableStyle():
     cStyle["rowCoE"] = "424242"  # / Dark
     cStyle["rowCoO"] = "353535"  # / Light
     cStyle["pastCo"] = cautionColor  # / PastDue Color
+    cStyle["priorityCo"] = priorityColor  # / PastDue Color
     return cStyle
 
 

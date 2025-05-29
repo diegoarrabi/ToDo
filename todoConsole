@@ -74,7 +74,17 @@ while true; do
 done
     
 nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
-nohup $PYTHON_VENV console2Background.py > /dev/null 2>&1 &
+# nohup $PYTHON_VENV console2Background.py > /dev/null 2>&1 &
+
+# count=0
+# while true; do
+#     echo "meow"
+#     sleep 1
+#     ((count+=1))
+#     if [[ $count -eq 5 ]]; then
+#         break
+#     fi
+# done
 echo "\x1b[0m"
 exit
 ############################################################################
