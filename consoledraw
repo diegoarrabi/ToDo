@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+
+# A - UP
+# B - DOWN
+# C - RIGHT
+# D - LEFT
+
+# ROWS=$((($(tput lines))/2))
+# COLS=$((($(tput cols))/2))
+
+function myecho() {
+    echo "${1}\x1b[1A"
+}
+
+myecho "\x1b[2J\x1b[H"
+
+ROWS=$(tput lines)
+COLS=$(tput cols)
+
+task_array=("${(@f)$(<TESTLIST.csv)}")
+task_count=${#task_array[@]}
+myecho $ROWS
+echo $task_count
+echo $((($ROWS)-($task_count)-1))
+
+
+
+
+
+exit
+
+
+
+# HIDE CURSOR
+echo "\x1b[?25l"
+
+
+# myecho "\x1b[2J"
+# sleep 1
+# myecho "\x1b[${ROWS};${COLS}H"
+# sleep 3
+# myecho "\x1b[10B"
+# sleep 1
+# myecho "\x1b[2A"
+# sleep 1
+# myecho "\x1b[5B"
+# sleep 1
+# myecho "\x1b[1A"
+# sleep 1
+# myecho "\x1b[H"
+# sleep 1
+
+# SHOW CURSOR
+myecho "\x1b[?25h"

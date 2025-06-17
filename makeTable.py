@@ -69,6 +69,7 @@ def makeTable(_from="makeTasks") -> None:
 
         try:
             dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
+            # pass
         except Exception:
             myLog("DataFrame_Image Module Error", log.ERROR)
     makeWallpaper()
@@ -92,7 +93,7 @@ def deletePreviousTable(images_directory: str) -> None:
 ###########################################################################
 
 
-def styleTable(df, headerCol):
+def styleTable(df: pd.DataFrame, headerCol: list) -> list:
     myLog("method: styleTable")
     cStyle = tableStyle()
     border_width = cStyle["border_width"]
@@ -109,11 +110,13 @@ def styleTable(df, headerCol):
     rECo = cStyle["rowCoE"]
     rOCo = cStyle["rowCoO"]
 
-    paddingHead = "padding-top: %sem; padding-bottom: %sem;" % (0, 0)
-    propsHead = f"font-weight:bold; background-color: #{box_color}; font-family: {head_font}; color: #{head_font_color}; font-size: {head_fontsize}em;"
+    paddingHead = f"padding-top: {0}em; padding-bottom: {0}em;"  # % (0, 0)
+    propsHead = f"font-weight:bold; background-color:#{box_color}; font-family: {head_font}; color: #{head_font_color}; font-size: {head_fontsize}em;"
 
-    paddingBody = "padding-top: %sem; padding-bottom: %sem;" % (0.3, 0.3)
-    paddingBodyL = "padding-left: %sem; padding-top: %sem; padding-bottom: %sem;" % (0.5, 0.4, 0.4)
+    paddingBody = f"padding-top: {0.4}em; padding-bottom: {0.4}em;"
+    # paddingBody = f"padding-top: {0.3}em; padding-bottom: {0.3}em;"
+    # paddingBodyL = f"padding-left: {0.5}em;"
+    paddingBodyL = f"padding-left: {0.5}em; padding-top: {0.4}em; padding-bottom: {0.4}em;"
     propsBodyE = f"font-weight:normal; background-color: #{rECo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
     propsBodyO = f"font-weight:normal; background-color: #{rOCo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
 
@@ -137,28 +140,51 @@ def styleTable(df, headerCol):
         {"selector": "td.col2", "props": f"text-align: right; {paddingBody}; {bRight}"},
         {"selector": "td.col3", "props": "display: none"},
         {"selector": "th.col3", "props": "display: none"},
+        {"selector": "tbody tr:nth-last-child(1)", "props": f"{paddingBody}"},
         {"selector": "tbody tr:nth-last-child(1)", "props": f"text-align: right; {paddingBody}; {bBottom}"},
     ]
 
-    today_length = len(df[df[headerCol[2]].str.contains("!")])
-    priority_length = len(df[df[headerCol[0]].str.contains("!")])
+    # today_length = len(df[df[headerCol[2]].str.contains("!")])
+    # important_length = len(df[df[headerCol[0]].str.contains("!")])
+    # priority_length = max(today_length, important_length)
 
-    if today_length > 0:
-        for i in range(today_length):
-            tempToday = {}
-            dict_keys = ["selector", "props"]
-            tempToday[dict_keys[0]] = ""
-            if priority_length != 0:
-                tempToday[dict_keys[1]] = "\
-                    text-decoration: underline solid 0.15em #%s; \
-                    font-weight: bold; \
-                    color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
-                priority_length -= 1
-            else:
-                tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
-            tempToday["selector"] = f"tbody tr:nth-child({i + 1})"
-            styleList.append(tempToday)
-            del tempToday
+    count = 0
+    for index, row in df.iterrows():
+        tempToday = {}
+        dict_keys = ["selector", "props"]
+        tempToday[dict_keys[0]] = ""
+        # Priority Tasks
+        if "!" in row["TASKS"]:
+            tempToday[dict_keys[1]] = "\
+                text-decoration: underline solid 0.15em #%s; \
+                font-weight: bold; \
+                color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
+        elif "!" in row["DAYS"]:
+            tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
+        else:
+            break
+        tempToday["selector"] = f"tbody tr:nth-child({count + 1})"
+        count += 1
+        styleList.append(tempToday)
+        del tempToday
+
+    
+    # if priority_length > 0:
+    #     for i in range(priority_length):
+    #         tempToday = {}
+    #         dict_keys = ["selector", "props"]
+    #         tempToday[dict_keys[0]] = ""
+    #         if important_length != 0:
+    #             tempToday[dict_keys[1]] = "\
+    #                 text-decoration: underline solid 0.15em #%s; \
+    #                 font-weight: bold; \
+    #                 color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
+    #             important_length -= 1
+    #         else:
+    #             tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
+    #         tempToday["selector"] = f"tbody tr:nth-child({i + 1})"
+    #         styleList.append(tempToday)
+    #         del tempToday
 
     return styleList
 

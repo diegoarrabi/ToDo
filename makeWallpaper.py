@@ -146,7 +146,10 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
     myLog("method: createBoxTable")
     screen_x = 80
     screen_y = 475
+    crop = 5
     table_image_py = Image.open(table_image_path)
+    table_image_py = table_image_py.crop((crop, crop, table_image_py.width - crop, table_image_py.height - crop))
+
     table_width = table_image_py.width
     table_height = table_image_py.height
     # width_ratio = (1+(4.75/100))
@@ -154,9 +157,11 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
     # top_shift_ratio = (20.5/100)
     width_ratio = 1 + (6 / 100)
     height_ratio = 1 + (20 / 100)
-    top_shift_ratio = 30 / 100
-    new_width = round(table_width * width_ratio)
-    new_height = round(table_height * height_ratio)
+    top_shift_ratio = 40 / 100
+    # new_width = round(table_width * width_ratio)
+    # new_height = round(table_height * height_ratio)
+    new_width = round(table_width + 100)
+    new_height = round(table_height + 150)
     border_image_py = makeRect(new_width, new_height)
     table_x = round((new_width - table_width) / 2)
     table_y = round(round((new_height - table_height)) * top_shift_ratio)
