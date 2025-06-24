@@ -232,7 +232,31 @@ def timeLabel(prefix="") -> str:
 
     return f"{prefix}{''.join(getTime())}"
 
+# LIGHT 
+# def tableStyle():
+#     cautionColor = "004874"
+#     priorityColor = "941717"
+#     cStyle = {}
+#     cStyle["head_font"] = "SF Pro Rounded"
+#     cStyle["body_font"] = "SF Mono"
+#     cStyle["head_font_size"] = 1.2
+#     cStyle["body_font_size"] = 1.3
+#     cStyle["border_width"] = 4
 
+#     # BOX COLOR
+#     cStyle["box_color"] = "828282"
+
+#     cStyle["head_font_color"] = "D0D0D0"
+#     cStyle["body_font_color"] = "F0F0F0"
+#     cStyle["header_line_color"] = "F0F0F0"
+
+#     cStyle["rowCoE"] = "828282"  # / Dark
+#     cStyle["rowCoO"] = "9B9B9B"  # / Light
+#     cStyle["pastCo"] = cautionColor  # / PastDue Color
+#     cStyle["priorityCo"] = priorityColor  # / PastDue Color
+#     return cStyle
+
+# DARK
 def tableStyle():
     cautionColor = "F86702"
     priorityColor = "FB3819"
