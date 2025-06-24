@@ -15,7 +15,6 @@ from makeTable import makeTable
 def makeTasks(arg) -> None:
     # ENTRY POINT FROM INPUT-CONSOLE
     # THIS SCRIPT ADDS/REMOVES TASKS
-
     myLog("-[ TODO CONSOLE ]-")
     myLog("__makeTasks.py__".upper())
     if len(arg) != 0:

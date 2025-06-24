@@ -63,11 +63,16 @@ while true; do
             break
         fi
     ;;
-    "open" )
+    "open" | "tasks" )
         open TaskList.csv
+    ;;
+    "vscode" | "code" )
+        code $SCRIPT_DIR
+        break
     ;;
     "update" )
         PYTHON_SCRIPT="makeUpdate.py"
+        break
     ;;
     * )
         ITEM_LIST+=($INPUT)
