@@ -69,7 +69,6 @@ def makeTable(_from="makeTasks") -> None:
 
         try:
             dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
-            # pass
         except Exception:
             myLog("DataFrame_Image Module Error", log.ERROR)
     makeWallpaper()
