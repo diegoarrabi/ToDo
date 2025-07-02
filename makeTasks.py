@@ -15,14 +15,23 @@ from makeTable import makeTable
 def makeTasks(arg) -> None:
     # ENTRY POINT FROM INPUT-CONSOLE
     # THIS SCRIPT ADDS/REMOVES TASKS
+
     myLog("-[ TODO CONSOLE ]-")
     myLog("__makeTasks.py__".upper())
+
+    todos_list = pd.read_csv(csv_path, header=None)
+    print(todos_list)
+
     if len(arg) != 0:
         logAllTasks(arg)
+        df_todo = pd.read_csv(csv_path, header=None)
+
         for _index, _item in enumerate(arg):
             myLog(f"Item {_index + 1}: {_item.upper()}")
             if "-" in _item:
                 task_info = _item.split(" - ")
+                if task_info[0].isdigit():
+                    task_info[0] = todos_list.iloc[int(task_info[0])-1, 0]
                 if " r " in _item:
                     taskRename(task_info)
                     continue
@@ -31,8 +40,6 @@ def makeTasks(arg) -> None:
                     taskAddEdit(task_info)
                 elif duedate_value == "done":
                     taskComplete(task_info)
-            elif "update" in _item:
-                print("UPDATE")
             else:
                 myLog(f"UNKNOWN INPUT: {_item}", log.ERROR)
     else:
@@ -67,7 +74,7 @@ def taskRename(assignment_info: list[str]) -> None:
 
     # USING AN INTEGER TO EDIT A TASK
     if assignment_info[0].isdigit():
-        myLog("method: taskAddEdit -- EDIT TASK")
+        myLog("INTEGERINTEGER-SHOULDNOLONGERRUN - method: taskAddEdit -- EDIT TASK")
         task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
         df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL] = assignment_info[ASSIGNMENT_NEW_NAME]
         saveCSV(df_todo)
@@ -141,7 +148,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
 
     # USING AN INTEGER TO EDIT A TASK
     if assignment_info[0].isdigit():
-        myLog("method: taskAddEdit -- EDIT TASK")
+        myLog("INTEGERINTEGER-SHOULDNOLONGERRUN - method: taskAddEdit -- EDIT TASK")
         task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
         df_todo.loc[(int(assignment_info[0]) - 1), DATE_COL] = item_date
         saveCSV(df_todo)

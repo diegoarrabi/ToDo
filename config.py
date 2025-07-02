@@ -20,7 +20,7 @@ half_tab = 2
 # txt_doc_name = "TasksToDo.txt"
 
 # MAKETABLE.PY
-day_limit = 8
+day_limit = 5
 
 
 
