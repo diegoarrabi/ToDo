@@ -8,9 +8,9 @@ from sys import exit as _exit
 
 # GLOBALS
 # CONFIG ONLY
-DEBUG=True
+DEBUG=False
 if DEBUG:
-    table_name = "resources/TEST.csv"
+    table_name = "resources/debug.csv"
 else:
     table_name = "TaskList.csv"
 code_wrap = 150
