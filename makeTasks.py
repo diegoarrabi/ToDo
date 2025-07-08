@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from sys import argv
 
 import pandas as pd
+from pandas import DataFrame
 
 from config import copy2Clipboard, csv_path, getDialog, log, myLog
 from makeTable import makeTable
@@ -20,7 +21,6 @@ def makeTasks(arg) -> None:
     myLog("__makeTasks.py__".upper())
 
     todos_list = pd.read_csv(csv_path, header=None)
-    print(todos_list)
 
     if len(arg) != 0:
         logAllTasks(arg)
@@ -32,7 +32,10 @@ def makeTasks(arg) -> None:
                 task_info = _item.split(" - ")
                 if task_info[0].isdigit():
                     task_info[0] = todos_list.iloc[int(task_info[0])-1, 0]
-                if " r " in _item:
+                if "i" in task_info:
+                    taskImportance(task_info)
+                    continue
+                if "r" in task_info:
                     taskRename(task_info)
                     continue
                 duedate_value = (task_info[1].strip()).lower()
@@ -43,6 +46,7 @@ def makeTasks(arg) -> None:
             else:
                 myLog(f"UNKNOWN INPUT: {_item}", log.ERROR)
     else:
+        myLog("NO ITEMS PROVIDED")
         df_todo = pd.read_csv(csv_path, header=None)
         saveCSV(df_todo)
     makeTable()
@@ -67,6 +71,31 @@ def logAllTasks(task_list: list) -> None:
 ############################################################################
 
 
+def taskImportance(assignment_info: list[str]) -> None:
+    myLog("method: taskImportance")
+    df_todo: DataFrame = pd.read_csv(csv_path, header=None)
+    all_assignments_count = len(df_todo.index)
+
+    # USING AN INTEGER TO EDIT A TASK
+    for _index in range(all_assignments_count):
+
+        task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
+        if task_label == assignment_info[0].lower():
+            if task_label[-1] == "!":
+                myLog("method: taskImportance - NOT IMPORTANT")
+                task_label = task_label[:-1]
+            else:
+                task_label = f"{task_label}!"
+                myLog("method: taskImportance - IMPORTANT")
+            myLog("method: taskImportance -- IMPORTANT TASK")
+            df_todo.loc[_index, ASSIGNMENT_COL] = task_label
+            saveCSV(df_todo)
+            break
+
+
+############################################################################
+
+
 def taskRename(assignment_info: list[str]) -> None:
     myLog("method: taskRename")
     df_todo = pd.read_csv(csv_path, header=None)
@@ -74,7 +103,7 @@ def taskRename(assignment_info: list[str]) -> None:
 
     # USING AN INTEGER TO EDIT A TASK
     if assignment_info[0].isdigit():
-        myLog("INTEGERINTEGER-SHOULDNOLONGERRUN - method: taskAddEdit -- EDIT TASK")
+        myLog("INTEGERINTEGER-SHOULDNOLONGERRUN - method: taskRename -- RENAME TASK")
         task_label = df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL]
         df_todo.loc[(int(assignment_info[0]) - 1), ASSIGNMENT_COL] = assignment_info[ASSIGNMENT_NEW_NAME]
         saveCSV(df_todo)
@@ -82,7 +111,7 @@ def taskRename(assignment_info: list[str]) -> None:
     for _index in range(all_assignments_count):
         task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
         if task_label == assignment_info[0].lower():
-            myLog("method: taskAddEdit -- EDIT TASK")
+            myLog("method: taskRename -- RENAME TASK")
             df_todo.loc[_index, ASSIGNMENT_COL] = assignment_info[ASSIGNMENT_NEW_NAME]
             saveCSV(df_todo)
             break
@@ -202,7 +231,6 @@ def sortTasks(df_list):
     df_list[DATE_COL] = pd.to_datetime(df_list[DATE_COL], format=DATE_FORMAT)
     df_list = df_list.sort_values(by=DATE_COL).reset_index(drop=True)
     _location = 0
-    print(df_list)
     for _idx, _row in df_list.iterrows():
         if "!" in _row[ASSIGNMENT_COL]:
             row_obj = df_list.loc[[_idx]]
@@ -212,7 +240,6 @@ def sortTasks(df_list):
             df_top = df_list.iloc[:_location]
             df_bottom = df_list.iloc[_location:]
             df_list = pd.concat([df_top, row_obj, df_bottom])
-            print(df_list)
             _location += 1
     return df_list
 

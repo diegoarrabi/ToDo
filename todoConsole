@@ -81,12 +81,13 @@ while true; do
     esac
 done
     
-nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
+$PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST
+# nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 # nohup $PYTHON_VENV console2Background.py > /dev/null 2>&1 &
 
 
-echo "\x1b[0m"
-exit
+# echo "\x1b[0m"
+# exit
 ############################################################################
 ############################################################################
 ############################################################################
