@@ -80,7 +80,7 @@ while true; do
     ;;
     esac
 done
-    
+
 nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 
 

@@ -8,6 +8,7 @@ from sys import argv
 
 import dataframe_image as dfi
 import pandas as pd
+from pandas import DataFrame
 
 from config import clearScreen, csv_path, day_limit, log, myLog, path_dict, tableStyle
 from makeWallpaper import makeWallpaper
@@ -38,35 +39,44 @@ def makeTable(_from="makeTasks") -> None:
 
     dt_day_limit = timedelta(days=day_limit)
     time_now = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
-
     df_todo = pd.read_csv(csv_path, header=None)
     df_todo.rename(columns={0: HEADER[0], 1: HEADER[1]}, inplace=True)
     df_todo[DATE_COL] = pd.to_datetime(df_todo[DATE_COL], format=DATE_FORMAT)
     df_todo[DAY_STR_COL] = ""
     df_todo[DAYS_COL] = df_todo[DATE_COL] - time_now
     df_todo[DATE_COL] = df_todo[DATE_COL].dt.strftime("%m/%d")
-
-    df_soon = df_todo[df_todo[DAYS_COL] < dt_day_limit]
-
+    df_soon: DataFrame = df_todo[df_todo[DAYS_COL] < dt_day_limit]
     if not df_soon.empty:
-        for _row in range(len(df_soon.index)):
-            days_left = df_soon.loc[_row, DAYS_COL].days
+        for index, row in df_soon.iterrows():
+            days_left = row[DAYS_COL].days
             if days_left == 0:
-                df_soon.loc[_row, TASK_COL] = df_soon.loc[_row, TASK_COL].upper()
-                df_soon.loc[_row, DAY_STR_COL] = "TODAY!"
+                df_soon.loc[index, TASK_COL] = row[TASK_COL].upper()
+                df_soon.loc[index, DAY_STR_COL] = "TODAY!"
             elif days_left == -1:
-                df_soon.loc[_row, TASK_COL] = df_soon.loc[_row, TASK_COL].upper()
-                df_soon.loc[_row, DAY_STR_COL] = "YESTERDAY!"
+                df_soon.loc[index, TASK_COL] = row[TASK_COL].upper()
+                df_soon.loc[index, DAY_STR_COL] = "YESTERDAY!"
             elif days_left < -1:
-                df_soon.loc[_row, TASK_COL] = df_soon.loc[_row, TASK_COL].upper()
-                df_soon.loc[_row, DAY_STR_COL] = f"{days_left} DAYS AGO!"
+                df_soon.loc[index, TASK_COL] = row[TASK_COL].upper()
+                df_soon.loc[index, DAY_STR_COL] = f"{days_left} DAYS AGO!"
             elif days_left == 1:
-                df_soon.loc[_row, DAY_STR_COL] = "Tomorrow"
+                df_soon.loc[index, DAY_STR_COL] = "Tomorrow"
             elif days_left > 1:
-                df_soon.loc[_row, DAY_STR_COL] = f"{days_left} Days"
+                df_soon.loc[index, DAY_STR_COL] = f"{days_left} Days"
+            # if days_left == 0:
+            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
+            #     df_soon.loc[row, DAY_STR_COL] = "TODAY!"
+            # elif days_left == -1:
+            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
+            #     df_soon.loc[row, DAY_STR_COL] = "YESTERDAY!"
+            # elif days_left < -1:
+            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
+            #     df_soon.loc[row, DAY_STR_COL] = f"{days_left} DAYS AGO!"
+            # elif days_left == 1:
+            #     df_soon.loc[row, DAY_STR_COL] = "Tomorrow"
+            # elif days_left > 1:
+            #     df_soon.loc[row, DAY_STR_COL] = f"{days_left} Days"
 
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
-
         try:
             dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
         except Exception:
@@ -86,7 +96,7 @@ def deletePreviousTable(images_directory: str) -> None:
     if len(previous_table) == 0:
         return
     previous_path = path.join(images_directory, previous_table[0])
-    run(["rm", "-f", previous_path])
+    cmd = run(["rm", "-f", previous_path], capture_output=True, text=True)
 
 
 ###########################################################################
@@ -167,7 +177,6 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
         styleList.append(tempToday)
         del tempToday
 
-    
     # if priority_length > 0:
     #     for i in range(priority_length):
     #         tempToday = {}

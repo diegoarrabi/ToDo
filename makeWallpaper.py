@@ -208,4 +208,5 @@ def updateWallpaper(item_path: str) -> None:
 ############################################################################
 
 
-makeWallpaper()
+if __name__ == "__main__":
+    makeWallpaper()

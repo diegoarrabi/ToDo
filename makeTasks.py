@@ -21,7 +21,6 @@ def makeTasks(arg) -> None:
     myLog("__makeTasks.py__".upper())
 
     todos_list = pd.read_csv(csv_path, header=None)
-
     if len(arg) != 0:
         logAllTasks(arg)
         df_todo = pd.read_csv(csv_path, header=None)
