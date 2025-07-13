@@ -16,6 +16,7 @@ from makeWallpaper import makeWallpaper
 ############################################################################
 
 
+
 def makeTable(_from="makeTasks") -> None:
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
@@ -88,7 +89,7 @@ def deletePreviousTable(images_directory: str) -> None:
 ###########################################################################
 
 
-def styleTable(df: pd.DataFrame, headerCol: list) -> list:
+def styleTable(df: DataFrame, headerCol: list) -> list:
     myLog("method: styleTable")
     cStyle = tableStyle()
     border_width = cStyle["border_width"]
@@ -139,10 +140,6 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
         {"selector": "tbody tr:nth-last-child(1)", "props": f"text-align: right; {paddingBody}; {bBottom}"},
     ]
 
-    # today_length = len(df[df[headerCol[2]].str.contains("!")])
-    # important_length = len(df[df[headerCol[0]].str.contains("!")])
-    # priority_length = max(today_length, important_length)
-
     count = 0
     for index, row in df.iterrows():
         tempToday = {}
@@ -163,22 +160,6 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
         styleList.append(tempToday)
         del tempToday
 
-    # if priority_length > 0:
-    #     for i in range(priority_length):
-    #         tempToday = {}
-    #         dict_keys = ["selector", "props"]
-    #         tempToday[dict_keys[0]] = ""
-    #         if important_length != 0:
-    #             tempToday[dict_keys[1]] = "\
-    #                 text-decoration: underline solid 0.15em #%s; \
-    #                 font-weight: bold; \
-    #                 color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
-    #             important_length -= 1
-    #         else:
-    #             tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
-    #         tempToday["selector"] = f"tbody tr:nth-child({i + 1})"
-    #         styleList.append(tempToday)
-    #         del tempToday
 
     return styleList
 

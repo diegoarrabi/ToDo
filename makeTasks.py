@@ -1,6 +1,5 @@
 #!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
 
-
 from datetime import datetime, timedelta
 from sys import argv
 
@@ -10,8 +9,9 @@ from pandas import DataFrame
 from config import copy2Clipboard, csv_path, getDialog, log, myLog
 from makeTable import makeTable
 
-############################################################################
+from modules.objects import Task, AllTasks
 
+############################################################################
 
 def makeTasks(arg) -> None:
     # ENTRY POINT FROM INPUT-CONSOLE
@@ -19,11 +19,20 @@ def makeTasks(arg) -> None:
 
     myLog("-[ TODO CONSOLE ]-")
     myLog("__makeTasks.py__".upper())
+    all_tasks = AllTasks()
 
     todos_list = pd.read_csv(csv_path, header=None)
+    for index, row in todos_list.iterrows():
+        task_name = row[0]
+        task_date = row[1]
+        all_tasks.addTask(Task(name=task_name, duedate=task_date))
+    all_tasks.printTasks()
+    exit()
+
+
+
     if len(arg) != 0:
         logAllTasks(arg)
-        df_todo = pd.read_csv(csv_path, header=None)
 
         for _index, _item in enumerate(arg):
             myLog(f"Item {_index + 1}: {_item.upper()}")
@@ -46,8 +55,7 @@ def makeTasks(arg) -> None:
                 myLog(f"UNKNOWN INPUT: {_item}", log.ERROR)
     else:
         myLog("NO ITEMS PROVIDED")
-        df_todo = pd.read_csv(csv_path, header=None)
-        saveCSV(df_todo)
+        saveCSV(todos_list)
     makeTable()
 
 
