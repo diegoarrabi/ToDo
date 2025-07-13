@@ -4,55 +4,73 @@
 # ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌     █    █  ▐▌ ▐▌▐▛▚▖▐▌▐▌   
 # ▐▛▀▀▘▐▌ ▐▌▐▌ ▝▜▌▐▌     █    █  ▐▌ ▐▌▐▌ ▝▜▌ ▝▀▚▖
 # ▐▌   ▝▚▄▞▘▐▌  ▐▌▝▚▄▄▖  █  ▗▄█▄▖▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘
-# ##########################################################################
+# ###############################################
+
+function clearScreen() {
+    # MARK: CLEARSCREEN
+    echo "\x1b[2J\x1b[H\x1b[3A"
+} ###############################################
+
 
 function consoleSetUp() {
+    # MARK: CONSOLESETUP
     EXE_PATH="$1"
     SCRIPT_DIR=$(dirname $EXE_PATH)
     cd $SCRIPT_DIR
-    PYTHON_VENV="/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python"
+    PYTHON_VENV="$HOME/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python"
     ITEM_LIST=()
     PYTHON_SCRIPT="makeTasks.py"
     HEIGHT=$(tput lines)
-    
     clearScreen
-    
     # CHANGE FONT COLOR
     echo "\x1b[1A\x1b[38;5;244m  Task     -     Date"
     echo "\x1b[1A\x1b[38;5;202m"
-
 } ###############################################
 
-function clearScreen() {
-    # CLEAR SCREEN AND SET CURSOR ON TOP
-    echo "\x1b[2J"
-    echo "\x1b[H"
-    echo "\x1b[3A"
-} ###############################################
 
 function showTasks() {
+    # MARK: SHOWTASKS
     clearScreen
     task_str=$(sed 's/,/  -  /' TaskList.csv)
     echo $task_str
     echo "\x1b[${HEIGHT}B"
     read -q "CONTINUE?Continue? (enter: no; y: yes): "
     clearScreen
-    
 } ###############################################
 
 
+function helpMessage() {
+    # MARK: HELPMESSAGE
+    clearScreen
+    cat << EOF
+ToDo Application:
+    "list" | "l" ------------- to show all tasks
+    "open" | "tasks" --------- open csv file
+    "vscode" | "code" -------- open vscode
+    "update" ----------------- update all tasks
+    "toggle" | "desktop" ----- toggle todo view
+    "" | " " | "q" | "quit" -- quit
+    "help" | "h" ------------- this message
+EOF
+    echo "\x1b[${HEIGHT}B"
+    read -q "CONTINUE?Continue? (enter: no; y: yes): "
+    clearScreen
+} ###############################################
+
+
+# MARK: ----START---
 #  ▗▄▄▖▗▄▄▄▖▗▄▖ ▗▄▄▖▗▄▄▄▖
 # ▐▌     █ ▐▌ ▐▌▐▌ ▐▌ █  
 #  ▝▀▚▖  █ ▐▛▀▜▌▐▛▀▚▖ █  
 # ▗▄▄▞▘  █ ▐▌ ▐▌▐▌ ▐▌ █
-# ##########################################################################
+# #######################
 
 consoleSetUp $0
 
 while true; do
     read "INPUT?: "
     case "${INPUT}" in
-    "" | " " | "q" | "quit" | "-q" | "-quit" )
+    "" | " " | "q" | "quit" )
         break
     ;;
     "list" | "l" | "-list" | "-l" )
@@ -74,6 +92,18 @@ while true; do
         PYTHON_SCRIPT="makeUpdate.py"
         break
     ;;
+    "toggle" | "desktop" )
+        echo "TOGGLE"
+        break
+    ;;
+    "help" | "h" )
+        helpMessage;
+        if [ $CONTINUE = "y" ]; then
+            consoleSetUp $EXE_PATH
+        else
+            break
+        fi
+    ;;
     * )
         ITEM_LIST+=($INPUT)
         PYTHON_SCRIPT="makeTasks.py"
@@ -83,9 +113,8 @@ done
 
 nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 
-
-# echo "\x1b[0m"
-# exit
+echo "\x1b[0m"
+exit
 ############################################################################
 ############################################################################
 ############################################################################

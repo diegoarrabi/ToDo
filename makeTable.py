@@ -15,7 +15,7 @@ from makeWallpaper import makeWallpaper
 
 ############################################################################
 
-
+#region MAKETABLE
 def makeTable(_from="makeTasks") -> None:
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
