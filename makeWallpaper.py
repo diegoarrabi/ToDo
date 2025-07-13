@@ -8,8 +8,9 @@ from config import log, myLog, path_dict, tableStyle, timeLabel
 ############################################################################
 
 
-def makeWallpaper():
+def makeWallpaper(arg: list = []):
     myLog("__makeWallpaper.py__")
+
     images_dir = path_dict["images"]
     base_wallpaper_name = "Wallpaper.png"
     base_wallpaper_name_MultiDisplay = "WallpaperMultiDisplay.png"
@@ -20,7 +21,7 @@ def makeWallpaper():
     base_wallpaper_path = path.join(images_dir, wallpaper_name)
     new_wallpaper_savepath = path.join(images_dir, new_wallpaper_name)
     table_path = getTablePath(images_dir)
-
+    
     deletePreviousWallpaper(images_dir)
 
     if table_path == "":
@@ -29,6 +30,7 @@ def makeWallpaper():
         createBoxTable(table_path, base_wallpaper_path, new_wallpaper_savepath)
 
     updateWallpaper(new_wallpaper_savepath)
+    myLog("-[ DONE ]-")
 
 
 ############################################################################
@@ -197,7 +199,6 @@ def updateWallpaper(item_path: str) -> None:
         item_path (str): Full Path to image to use as wallpaper
     """
     myLog("method: updateWallpaper")
-    myLog(f"Wallpaper Path: {path.isfile(item_path)}")
     script = 'tell application "Finder" to set desktop picture to POSIX file "%s"' % (item_path)
     try:
         run(["osascript", "-e", script], capture_output=True, text=True)

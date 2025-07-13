@@ -1,6 +1,5 @@
 #!/Users/diegoibarra/.config/pyenv/versions/3.13.0/envs/ToDo/bin/python
 
-
 from datetime import datetime, timedelta
 from sys import argv
 
@@ -13,18 +12,22 @@ from makeTable import makeTable
 ############################################################################
 
 
-def makeTasks(arg) -> None:
+def makeTasks(arg: list) -> None:
     # ENTRY POINT FROM INPUT-CONSOLE
     # THIS SCRIPT ADDS/REMOVES TASKS
-
     myLog("-[ TODO CONSOLE ]-")
     myLog("__makeTasks.py__".upper())
 
     todos_list = pd.read_csv(csv_path, header=None)
-    if len(arg) != 0:
+        
+    if len(arg) == 0:
+        myLog("NO ITEMS PROVIDED")
+        saveCSV(todos_list)
+    elif arg[0] == "toggle":
+        makeTable(arg[0])
+        return 0
+    else:
         logAllTasks(arg)
-        df_todo = pd.read_csv(csv_path, header=None)
-
         for _index, _item in enumerate(arg):
             myLog(f"Item {_index + 1}: {_item.upper()}")
             if "-" in _item:
@@ -44,10 +47,6 @@ def makeTasks(arg) -> None:
                     taskComplete(task_info)
             else:
                 myLog(f"UNKNOWN INPUT: {_item}", log.ERROR)
-    else:
-        myLog("NO ITEMS PROVIDED")
-        df_todo = pd.read_csv(csv_path, header=None)
-        saveCSV(df_todo)
     makeTable()
 
 
@@ -64,7 +63,7 @@ def logAllTasks(task_list: list) -> None:
         task_list: (list): raw task info
     """
     for _count, _item in enumerate(task_list):
-        myLog(f"{' ' * 3}ITEM {_count}: {_item.upper()}")
+        myLog(f"{' ' * 3}ITEM {_count+1}: {_item.upper()}")
 
 
 ############################################################################
@@ -233,9 +232,7 @@ def sortTasks(df_list):
     for _idx, _row in df_list.iterrows():
         if "!" in _row[ASSIGNMENT_COL]:
             row_obj = df_list.loc[[_idx]]
-
             df_list = df_list.drop(df_list.index[_idx])
-
             df_top = df_list.iloc[:_location]
             df_bottom = df_list.iloc[_location:]
             df_list = pd.concat([df_top, row_obj, df_bottom])
@@ -249,7 +246,6 @@ def saveCSV(df_list) -> None:
     sorted_df.to_csv(csv_path, index=False, header=False, date_format=DATE_FORMAT)
 
 ############################################################################
-
 
 if __name__ == "__main__":
     ASSIGNMENT_COL = 0

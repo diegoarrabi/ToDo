@@ -16,19 +16,22 @@ from makeWallpaper import makeWallpaper
 ############################################################################
 
 #region MAKETABLE
-def makeTable(_from="makeTasks") -> None:
+def makeTable(_from="") -> None:
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
     clearScreen()
-    if _from == "launchctl":
-        myLog("-[ LAUNCH DAEMON ]-")
-    elif _from == "vscode":
-        myLog("-[ VSCODE DEBUG ]-")
+    
     myLog("__makeTable.py__".upper())
-
+    
+    make_image: bool = True
     images_directory = path_dict["images"]
-
-    deletePreviousTable(images_directory)
+    table_exists = deletePreviousTable(images_directory)
+    
+    if _from == "toggle":
+        myLog("toggle argument")
+        if table_exists:
+            make_image = False
+            myLog("TURN DESKTOP OFF")
 
     HEADER = ["TASKS", "DUE DATE", "DAYS", "_Days"]
     TASK_COL = HEADER[0]
@@ -64,11 +67,12 @@ def makeTable(_from="makeTasks") -> None:
                 df_soon.loc[index, DAY_STR_COL] = f"{days_left} Days"
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
         try:
-            dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
+            if make_image:
+                myLog("TURN DESKTOP ON")
+                dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
         except Exception:
             myLog("DataFrame_Image Module Error", log.ERROR)
     makeWallpaper()
-    myLog("-[ DONE ]-")
 
 
 ###########################################################################
@@ -76,13 +80,16 @@ def makeTable(_from="makeTasks") -> None:
 ###########################################################################
 
 
-def deletePreviousTable(images_directory: str) -> None:
+def deletePreviousTable(images_directory: str) -> bool:
     myLog("method: deletePreviousTable")
     previous_table = [x for x in listdir(images_directory) if x.startswith("table")]
     if len(previous_table) == 0:
-        return
+        myLog("TABLE DOES NOT EXIST")
+        return False
     previous_path = path.join(images_directory, previous_table[0])
-    cmd = run(["rm", "-f", previous_path], capture_output=True, text=True)
+    run(["rm", "-f", previous_path])
+    myLog("TABLE DOES EXIST")
+    return True
 
 
 ###########################################################################

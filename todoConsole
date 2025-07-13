@@ -44,13 +44,13 @@ function helpMessage() {
     clearScreen
     cat << EOF
 ToDo Application:
-    "list" | "l" ------------- to show all tasks
-    "open" | "tasks" --------- open csv file
-    "vscode" | "code" -------- open vscode
-    "update" ----------------- update all tasks
-    "toggle" | "desktop" ----- toggle todo view
-    "" | " " | "q" | "quit" -- quit
-    "help" | "h" ------------- this message
+    "list" | "l" ---------------- to show all tasks
+    "open" | "tasks" ------------ open csv file
+    "vscode" | "code" ----------- open vscode
+    "update" -------------------- update all tasks
+    "t" | "toggle" | "desktop" -- toggle todo view
+    "" | " " | "q" | "quit" ----- quit
+    "help" | "h" ---------------- this message
 EOF
     echo "\x1b[${HEIGHT}B"
     read -q "CONTINUE?Continue? (enter: no; y: yes): "
@@ -92,8 +92,9 @@ while true; do
         PYTHON_SCRIPT="makeUpdate.py"
         break
     ;;
-    "toggle" | "desktop" )
-        echo "TOGGLE"
+    "t" | "toggle" | "desktop" )
+        PYTHON_SCRIPT="makeTasks.py"
+        ITEM_LIST+="toggle"
         break
     ;;
     "help" | "h" )
