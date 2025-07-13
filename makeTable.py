@@ -45,7 +45,7 @@ def makeTable(_from="makeTasks") -> None:
     df_todo[DAY_STR_COL] = ""
     df_todo[DAYS_COL] = df_todo[DATE_COL] - time_now
     df_todo[DATE_COL] = df_todo[DATE_COL].dt.strftime("%m/%d")
-    df_soon: DataFrame = df_todo[df_todo[DAYS_COL] < dt_day_limit]
+    df_soon: DataFrame = df_todo[(df_todo[DAYS_COL] < dt_day_limit) | (df_todo[TASK_COL].str.endswith("!"))]
     if not df_soon.empty:
         for index, row in df_soon.iterrows():
             days_left = row[DAYS_COL].days
@@ -62,20 +62,6 @@ def makeTable(_from="makeTasks") -> None:
                 df_soon.loc[index, DAY_STR_COL] = "Tomorrow"
             elif days_left > 1:
                 df_soon.loc[index, DAY_STR_COL] = f"{days_left} Days"
-            # if days_left == 0:
-            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
-            #     df_soon.loc[row, DAY_STR_COL] = "TODAY!"
-            # elif days_left == -1:
-            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
-            #     df_soon.loc[row, DAY_STR_COL] = "YESTERDAY!"
-            # elif days_left < -1:
-            #     df_soon.loc[row, TASK_COL] = df_soon.loc[row, TASK_COL].upper()
-            #     df_soon.loc[row, DAY_STR_COL] = f"{days_left} DAYS AGO!"
-            # elif days_left == 1:
-            #     df_soon.loc[row, DAY_STR_COL] = "Tomorrow"
-            # elif days_left > 1:
-            #     df_soon.loc[row, DAY_STR_COL] = f"{days_left} Days"
-
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
         try:
             dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
