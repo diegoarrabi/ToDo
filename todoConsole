@@ -6,6 +6,28 @@
 # ▐▌   ▝▚▄▞▘▐▌  ▐▌▝▚▄▄▖  █  ▗▄█▄▖▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘
 # ###############################################
 
+function readWithArrows() {
+    # key=""
+    while true; do
+        read -s -k 1 key
+        case "$key" in
+            $'\e')  # Escape sequence start
+                read -s -k 2 key  # Read next 2 chars
+                case "$key" in
+                    '[A') echo "Up arrow pressed" ;;
+                    '[B') echo "Down arrow pressed" ;;
+                    '[C') echo "Right arrow pressed" ;;
+                    '[D') echo "Left arrow pressed" ;;
+                    *) echo -n "$key" ;;
+                esac
+                ;;
+            $'\n') echo "ENTER" ;;  # Enter key
+            $'\t') echo "TAB" ;;  # Tab key
+            *) echo -n "$key" ;;  # Regular character
+        esac
+    done
+}
+
 function clearScreen() {
     # MARK: CLEARSCREEN
     echo "\x1b[2J\x1b[H\x1b[3A"
@@ -51,6 +73,9 @@ ToDo Application:
     "t" | "toggle" | "desktop" -- toggle todo view
     "" | " " | "q" | "quit" ----- quit
     "help" | "h" ---------------- this message
+
+    To rename a task use "task-name|index - r - new-name"
+    To flag a task use "task-name|index - i"
 EOF
     echo "\x1b[${HEIGHT}B"
     read -q "CONTINUE?Continue? (enter: no; y: yes): "
@@ -68,7 +93,9 @@ EOF
 consoleSetUp $0
 
 while true; do
-    read "INPUT?: "
+    INPUT=""
+    vared -p ": " INPUT
+
     case "${INPUT}" in
     "" | " " | "q" | "quit" )
         break
@@ -112,10 +139,10 @@ while true; do
     esac
 done
 
-nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
+# nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 
-echo "\x1b[0m"
-exit
+# echo "\x1b[0m"
+# exit
 ############################################################################
 ############################################################################
 ############################################################################
