@@ -6,27 +6,6 @@
 # ▐▌   ▝▚▄▞▘▐▌  ▐▌▝▚▄▄▖  █  ▗▄█▄▖▝▚▄▞▘▐▌  ▐▌▗▄▄▞▘
 # ###############################################
 
-function readWithArrows() {
-    # key=""
-    while true; do
-        read -s -k 1 key
-        case "$key" in
-            $'\e')  # Escape sequence start
-                read -s -k 2 key  # Read next 2 chars
-                case "$key" in
-                    '[A') echo "Up arrow pressed" ;;
-                    '[B') echo "Down arrow pressed" ;;
-                    '[C') echo "Right arrow pressed" ;;
-                    '[D') echo "Left arrow pressed" ;;
-                    *) echo -n "$key" ;;
-                esac
-                ;;
-            $'\n') echo "ENTER" ;;  # Enter key
-            $'\t') echo "TAB" ;;  # Tab key
-            *) echo -n "$key" ;;  # Regular character
-        esac
-    done
-}
 
 function clearScreen() {
     # MARK: CLEARSCREEN
