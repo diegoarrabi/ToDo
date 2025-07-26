@@ -25,7 +25,7 @@ function consoleSetUp() {
     clearScreen
     # CHANGE FONT COLOR
     echo "\x1b[1A\x1b[38;5;244m  Task     -     Date"
-    echo "\x1b[1A\x1b[38;5;202m"
+    # echo "\x1b[1A\x1b[38;5;202m"
 } ###############################################
 
 
@@ -72,12 +72,15 @@ EOF
 consoleSetUp $0
 
 while true; do
+    # read "INPUT?: "
     INPUT=""
-    vared -p ": " INPUT
+    PROMPT=$'\x1b[38;5;202m'
+    vared -p "$PROMPT: " INPUT
 
     case "${INPUT}" in
     "" | " " | "q" | "quit" )
-        break
+        echo "\x1b[0m"
+        exit
     ;;
     "list" | "l" | "-list" | "-l" )
         showTasks;
@@ -118,10 +121,10 @@ while true; do
     esac
 done
 
-# nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
+nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 
-# echo "\x1b[0m"
-# exit
+echo "\x1b[0m"
+exit
 ############################################################################
 ############################################################################
 ############################################################################

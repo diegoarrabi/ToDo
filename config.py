@@ -3,6 +3,7 @@ import logging as log
 from collections import defaultdict
 from datetime import datetime
 from os import listdir, path, remove
+from shutil import copy
 from subprocess import run
 from sys import exit as _exit
 
@@ -11,13 +12,14 @@ from sys import exit as _exit
 DEBUG=False
 if DEBUG:
     table_name = "resources/debug.csv"
+    backup_table_name = "resources/.backup/debug.csv"
 else:
     table_name = "TaskList.csv"
+    backup_table_name = "resources/.backup/TaskList.csv"
+
 code_wrap = 150
 half_tab = 2
 
-# # MAKETASKS.PY
-# txt_doc_name = "TasksToDo.txt"
 
 # MAKETABLE.PY
 day_limit = 5
@@ -141,7 +143,8 @@ def pathDict() -> dict:
 
 def csvTable(project_directory: str) -> str:
     """
-    Checks to see if csv file exists and returns path
+    Checks to see if csv file exists. If file exists, saves a backup copy and deletes previous backup if exists. 
+    Returns path of original csv file.
 
     Args:
         project_directory (str)
@@ -150,12 +153,20 @@ def csvTable(project_directory: str) -> str:
         str: path of csv file
     """
     global table_name
+    global backup_table_name
 
-    wb_path = path.join(project_directory, table_name)
-    if path.isfile(wb_path):
-        return wb_path
+    csv_path = path.join(project_directory, table_name)
+    backup_path = path.join(project_directory, backup_table_name)
+
+    # CHECKS IF CSV FILE EXISTS
+    if path.isfile(csv_path):
+        # CHECKS IF CSV BACKUP FILE EXISTS
+        if path.isfile(backup_path):
+            remove(backup_path)
+        copy(csv_path, backup_path)
+        return csv_path
     else:
-        _exit()
+        _exit(myLog("CSV FILE DOES NOT EXIST"))
 
 
 def getDialog(log_file="", message="") -> None:
