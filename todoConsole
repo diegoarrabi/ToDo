@@ -79,8 +79,10 @@ while true; do
 
     case "${INPUT}" in
     "" | " " | "q" | "quit" )
-        echo "\x1b[0m"
-        exit
+        if [[ -z $ITEM_LIST ]]; then
+            exit
+        fi
+        break
     ;;
     "list" | "l" | "-list" | "-l" )
         showTasks;
@@ -120,6 +122,14 @@ while true; do
     ;;
     esac
 done
+
+for item in "${ITEM_LIST[@]}"; do
+    echo "Processing: $item"
+    # Your processing code here
+done
+sleep 3
+exit
+
 
 nohup $PYTHON_VENV $PYTHON_SCRIPT $ITEM_LIST > /dev/null 2>&1 &
 
