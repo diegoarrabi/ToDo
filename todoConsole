@@ -78,10 +78,13 @@ while true; do
     vared -p "$PROMPT: " INPUT
 
     case "${INPUT}" in
-    "" | " " | "q" | "quit" )
+    "q" | "quit" )
         if [[ -z $ITEM_LIST ]]; then
             exit
         fi
+        break
+    ;;
+    "" | " " )
         break
     ;;
     "list" | "l" | "-list" | "-l" )
@@ -89,15 +92,16 @@ while true; do
         if [ $CONTINUE = "y" ]; then
             consoleSetUp $EXE_PATH
         else
-            break
+            exit
         fi
     ;;
     "open" | "tasks" )
         open TaskList.csv
+        exit
     ;;
     "vscode" | "code" )
         code $SCRIPT_DIR
-        break
+        exit
     ;;
     "update" )
         PYTHON_SCRIPT="makeUpdate.py"
