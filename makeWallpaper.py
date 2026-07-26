@@ -146,7 +146,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         return box_py
 
     myLog("method: createBoxTable")
-    screen_x = 80
+    screen_x = 40
     screen_y = 475
     crop = 5
     table_image_py = Image.open(table_image_path)

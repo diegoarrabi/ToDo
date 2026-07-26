@@ -15,7 +15,7 @@ from makeWallpaper import makeWallpaper
 
 ############################################################################
 
-#region MAKETABLE
+# region MAKETABLE
 def makeTable(_from="") -> None:
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
@@ -68,7 +68,8 @@ def makeTable(_from="") -> None:
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
         try:
             if make_image:
-                myLog("TURN DESKTOP ON")
+                if not table_exists: 
+                    myLog("TURN DESKTOP ON")
                 dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
         except Exception:
             myLog("DataFrame_Image Module Error", log.ERROR)
@@ -84,11 +85,11 @@ def deletePreviousTable(images_directory: str) -> bool:
     myLog("method: deletePreviousTable")
     previous_table = [x for x in listdir(images_directory) if x.startswith("table")]
     if len(previous_table) == 0:
-        myLog("TABLE DOES NOT EXIST")
+        myLog("NO TABLE TO DELETE")
         return False
     previous_path = path.join(images_directory, previous_table[0])
     run(["rm", "-f", previous_path])
-    myLog("TABLE DOES EXIST")
+    myLog("DELETING PREVIOUS TABLE")
     return True
 
 
