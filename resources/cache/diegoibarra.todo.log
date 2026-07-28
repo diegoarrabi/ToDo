@@ -1,0 +1,527 @@
+07.21[00:05:08]: __MAKETABLE.PY__
+07.21[00:05:08]:	└── method: deletePreviousTable
+07.21[00:05:08]: TABLE DOES EXIST
+07.21[00:05:08]:	└── method: styleTable
+07.21[00:05:08]: TURN DESKTOP ON
+07.21[00:05:15]: __makeWallpaper.py__
+07.21[00:05:16]:	└── method: getTablePath
+07.21[00:05:16]:	└── method: deletePreviousWallpaper
+07.21[00:05:16]:	└── method: createBoxTable
+07.21[00:05:16]:	└── method: makeRect [method: createBoxTable]
+07.21[00:05:22]:	└── method: updateWallpaper
+07.21[00:05:22]: --------------[ DONE ]-------------
+
+07.21[09:07:20]: __MAKETABLE.PY__
+07.21[09:07:20]:	└── method: deletePreviousTable
+07.21[09:07:20]: TABLE DOES EXIST
+07.21[09:07:20]:	└── method: styleTable
+07.21[09:07:20]: TURN DESKTOP ON
+07.21[09:07:25]: __makeWallpaper.py__
+07.21[09:07:26]:	└── method: getTablePath
+07.21[09:07:26]:	└── method: deletePreviousWallpaper
+07.21[09:07:26]:	└── method: createBoxTable
+07.21[09:07:26]:	└── method: makeRect [method: createBoxTable]
+07.21[09:07:33]:	└── method: updateWallpaper
+07.21[09:07:33]: --------------[ DONE ]-------------
+
+07.22[00:05:06]: __MAKETABLE.PY__
+07.22[00:05:06]:	└── method: deletePreviousTable
+07.22[00:05:06]: TABLE DOES EXIST
+07.22[00:05:06]:	└── method: styleTable
+07.22[00:05:06]: TURN DESKTOP ON
+07.22[00:05:09]: __makeWallpaper.py__
+07.22[00:05:09]:	└── method: getTablePath
+07.22[00:05:09]:	└── method: deletePreviousWallpaper
+07.22[00:05:09]:	└── method: createBoxTable
+07.22[00:05:09]:	└── method: makeRect [method: createBoxTable]
+07.22[00:05:15]:	└── method: updateWallpaper
+07.22[00:05:16]: --------------[ DONE ]-------------
+
+07.22[09:00:47]: __MAKETABLE.PY__
+07.22[09:00:47]:	└── method: deletePreviousTable
+07.22[09:00:47]: TABLE DOES EXIST
+07.22[09:00:47]:	└── method: styleTable
+07.22[09:00:47]: TURN DESKTOP ON
+07.22[09:00:49]: __makeWallpaper.py__
+07.22[09:00:49]:	└── method: getTablePath
+07.22[09:00:49]:	└── method: deletePreviousWallpaper
+07.22[09:00:49]:	└── method: createBoxTable
+07.22[09:00:49]:	└── method: makeRect [method: createBoxTable]
+07.22[09:00:57]:	└── method: updateWallpaper
+07.22[09:00:57]: --------------[ DONE ]-------------
+
+07.23[00:05:06]: __MAKETABLE.PY__
+07.23[00:05:06]:	└── method: deletePreviousTable
+07.23[00:05:06]: TABLE DOES EXIST
+07.23[00:05:07]:	└── method: styleTable
+07.23[00:05:07]: TURN DESKTOP ON
+07.23[00:05:09]: __makeWallpaper.py__
+07.23[00:05:10]:	└── method: getTablePath
+07.23[00:05:10]:	└── method: deletePreviousWallpaper
+07.23[00:05:10]:	└── method: createBoxTable
+07.23[00:05:10]:	└── method: makeRect [method: createBoxTable]
+07.23[00:05:16]:	└── method: updateWallpaper
+07.23[00:05:16]: --------------[ DONE ]-------------
+
+07.23[10:54:53]: __MAKETABLE.PY__
+07.23[10:54:53]:	└── method: deletePreviousTable
+07.23[10:54:53]: TABLE DOES EXIST
+07.23[10:54:53]:	└── method: styleTable
+07.23[10:54:53]: TURN DESKTOP ON
+07.23[10:54:56]: __makeWallpaper.py__
+07.23[10:54:57]:	└── method: getTablePath
+07.23[10:54:57]:	└── method: deletePreviousWallpaper
+07.23[10:54:57]:	└── method: createBoxTable
+07.23[10:54:57]:	└── method: makeRect [method: createBoxTable]
+07.23[10:55:03]:	└── method: updateWallpaper
+07.23[10:55:04]: --------------[ DONE ]-------------
+
+07.24[00:05:07]: __MAKETABLE.PY__
+07.24[00:05:07]:	└── method: deletePreviousTable
+07.24[00:05:07]: TABLE DOES EXIST
+07.24[00:05:07]:	└── method: styleTable
+07.24[00:05:07]: TURN DESKTOP ON
+07.24[00:05:10]: __makeWallpaper.py__
+07.24[00:05:11]:	└── method: getTablePath
+07.24[00:05:11]:	└── method: deletePreviousWallpaper
+07.24[00:05:11]:	└── method: createBoxTable
+07.24[00:05:11]:	└── method: makeRect [method: createBoxTable]
+07.24[00:05:17]:	└── method: updateWallpaper
+07.24[00:05:17]: --------------[ DONE ]-------------
+
+07.24[09:03:33]: __MAKETABLE.PY__
+07.24[09:03:33]:	└── method: deletePreviousTable
+07.24[09:03:33]: TABLE DOES EXIST
+07.24[09:03:33]:	└── method: styleTable
+07.24[09:03:33]: TURN DESKTOP ON
+07.24[09:03:36]: __makeWallpaper.py__
+07.24[09:03:36]:	└── method: getTablePath
+07.24[09:03:36]:	└── method: deletePreviousWallpaper
+07.24[09:03:36]:	└── method: createBoxTable
+07.24[09:03:36]:	└── method: makeRect [method: createBoxTable]
+07.24[09:03:43]:	└── method: updateWallpaper
+07.24[09:03:44]: --------------[ DONE ]-------------
+
+07.25[00:05:08]: __MAKETABLE.PY__
+07.25[00:05:08]:	└── method: deletePreviousTable
+07.25[00:05:08]: TABLE DOES EXIST
+07.25[00:05:08]:	└── method: styleTable
+07.25[00:05:08]: TURN DESKTOP ON
+07.25[00:05:16]: __makeWallpaper.py__
+07.25[00:05:16]:	└── method: getTablePath
+07.25[00:05:16]:	└── method: deletePreviousWallpaper
+07.25[00:05:16]:	└── method: createBoxTable
+07.25[00:05:16]:	└── method: makeRect [method: createBoxTable]
+07.25[00:05:22]:	└── method: updateWallpaper
+07.25[00:05:22]: --------------[ DONE ]-------------
+
+07.25[09:00:06]: __MAKETABLE.PY__
+07.25[09:00:06]:	└── method: deletePreviousTable
+07.25[09:00:06]: TABLE DOES EXIST
+07.25[09:00:06]:	└── method: styleTable
+07.25[09:00:06]: TURN DESKTOP ON
+07.25[09:00:09]: __makeWallpaper.py__
+07.25[09:00:09]:	└── method: getTablePath
+07.25[09:00:09]:	└── method: deletePreviousWallpaper
+07.25[09:00:09]:	└── method: createBoxTable
+07.25[09:00:09]:	└── method: makeRect [method: createBoxTable]
+07.25[09:00:15]:	└── method: updateWallpaper
+07.25[09:00:15]: --------------[ DONE ]-------------
+
+07.26[00:05:05]: __MAKETABLE.PY__
+07.26[00:05:05]:	└── method: deletePreviousTable
+07.26[00:05:05]: TABLE DOES EXIST
+07.26[00:05:05]:	└── method: styleTable
+07.26[00:05:05]: TURN DESKTOP ON
+07.26[00:05:11]: __makeWallpaper.py__
+07.26[00:05:11]:	└── method: getTablePath
+07.26[00:05:11]:	└── method: deletePreviousWallpaper
+07.26[00:05:11]:	└── method: createBoxTable
+07.26[00:05:11]:	└── method: makeRect [method: createBoxTable]
+07.26[00:05:17]:	└── method: updateWallpaper
+07.26[00:05:17]: --------------[ DONE ]-------------
+
+07.26[09:00:07]: __MAKETABLE.PY__
+07.26[09:00:07]:	└── method: deletePreviousTable
+07.26[09:00:07]: TABLE DOES EXIST
+07.26[09:00:07]:	└── method: styleTable
+07.26[09:00:07]: TURN DESKTOP ON
+07.26[09:00:16]: __makeWallpaper.py__
+07.26[09:00:16]:	└── method: getTablePath
+07.26[09:00:16]:	└── method: deletePreviousWallpaper
+07.26[09:00:16]:	└── method: createBoxTable
+07.26[09:00:16]:	└── method: makeRect [method: createBoxTable]
+07.26[09:00:22]:	└── method: updateWallpaper
+07.26[09:00:22]: --------------[ DONE ]-------------
+
+
+
+07.26[09:02:59]: ----------[ TODO CONSOLE ]---------
+07.26[09:02:59]: __MAKETASKS.PY__
+07.26[09:02:59]:    ITEM 1: 2 - 7/27
+07.26[09:02:59]:    ITEM 2: TEACH BACK DOC - 7/28
+07.26[09:02:59]:    ITEM 3: [DOC] INTERPROFESSINAL COLLABORATION - 7/30
+07.26[09:02:59]:    ITEM 4: [MODULES/QUIZ] HOME HEALTH - 7/29
+07.26[09:02:59]:    ITEM 5: [MODULES/QUIZ] WELLNESS - 7/29
+07.26[09:02:59]:    ITEM 6: NA MEETING #1 - 7/28
+07.26[09:02:59]:    ITEM 7: NA MEETING #2 - 7/30
+07.26[09:02:59]:    ITEM 8: NA REFLECTION ASSIGNMENT - 7/31
+07.26[09:02:59]: Item 1: 2 - 7/27
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- EDIT TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 2: TEACH BACK DOC - 7/28
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 3: [DOC] INTERPROFESSINAL COLLABORATION - 7/30
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 4: [MODULES/QUIZ] HOME HEALTH - 7/29
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 5: [MODULES/QUIZ] WELLNESS - 7/29
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 6: NA MEETING #1 - 7/28
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 7: NA MEETING #2 - 7/30
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: Item 8: NA REFLECTION ASSIGNMENT - 7/31
+07.26[09:02:59]:	└── method: taskAddEdit
+07.26[09:02:59]:	└── method: getFullDate
+07.26[09:02:59]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:02:59]:	└── method: saveCSV
+07.26[09:02:59]: __MAKETABLE.PY__
+07.26[09:02:59]:	└── method: deletePreviousTable
+07.26[09:02:59]: TABLE DOES EXIST
+07.26[09:02:59]:	└── method: styleTable
+07.26[09:02:59]: TURN DESKTOP ON
+07.26[09:03:02]: __makeWallpaper.py__
+07.26[09:03:02]:	└── method: getTablePath
+07.26[09:03:02]:	└── method: deletePreviousWallpaper
+07.26[09:03:02]:	└── method: createBoxTable
+07.26[09:03:02]:	└── method: makeRect [method: createBoxTable]
+07.26[09:03:08]:	└── method: updateWallpaper
+07.26[09:03:08]: --------------[ DONE ]-------------
+
+
+
+07.26[09:04:21]: ----------[ TODO CONSOLE ]---------
+07.26[09:04:21]: __MAKETASKS.PY__
+07.26[09:04:21]:    ITEM 1: EMAIL STEPHANIE - TODAY
+07.26[09:04:21]:    ITEM 2: 4 - [DOC] TEACH BACK
+07.26[09:04:21]: Item 1: EMAIL STEPHANIE - TODAY
+07.26[09:04:21]:	└── method: taskAddEdit
+07.26[09:04:21]:	└── method: getFullDate
+07.26[09:04:21]:	└── method: taskAddEdit -- ADD TASK
+07.26[09:04:21]:	└── method: saveCSV
+07.26[09:04:21]: Item 2: 4 - [DOC] TEACH BACK
+07.26[09:04:21]:	└── method: taskAddEdit
+07.26[09:04:21]:	└── method: getFullDate
+
+
+07.26[09:06:10]: ----------[ TODO CONSOLE ]---------
+07.26[09:06:10]: __MAKETASKS.PY__
+07.26[09:06:10]: NO ITEMS PROVIDED
+07.26[09:06:10]:	└── method: saveCSV
+07.26[09:06:10]: __MAKETABLE.PY__
+07.26[09:06:10]:	└── method: deletePreviousTable
+07.26[09:06:10]: TABLE DOES EXIST
+07.26[09:06:10]:	└── method: styleTable
+07.26[09:06:10]: TURN DESKTOP ON
+07.26[09:06:12]: __makeWallpaper.py__
+07.26[09:06:12]:	└── method: getTablePath
+07.26[09:06:12]:	└── method: deletePreviousWallpaper
+07.26[09:06:12]:	└── method: createBoxTable
+07.26[09:06:12]:	└── method: makeRect [method: createBoxTable]
+07.26[09:06:18]:	└── method: updateWallpaper
+07.26[09:06:18]: --------------[ DONE ]-------------
+
+
+
+07.26[09:07:36]: ----------[ TODO CONSOLE ]---------
+07.26[09:07:36]: __MAKETASKS.PY__
+07.26[09:07:36]:    ITEM 1: 1 - SCHEDULE AMRCC TBL
+07.26[09:07:36]: Item 1: 1 - SCHEDULE AMRCC TBL
+07.26[09:07:36]:	└── method: taskAddEdit
+07.26[09:07:36]:	└── method: getFullDate
+
+
+07.26[09:31:00]: ----------[ TODO CONSOLE ]---------
+07.26[09:31:00]: __MAKETASKS.PY__
+07.26[09:31:00]: NO ITEMS PROVIDED
+07.26[09:31:00]:	└── method: saveCSV
+07.26[09:31:00]: __MAKETABLE.PY__
+07.26[09:31:00]:	└── method: deletePreviousTable
+07.26[09:31:00]: DELETING PREVIOUS TABLE
+07.26[09:31:00]:	└── method: styleTable
+07.26[09:31:08]: __makeWallpaper.py__
+07.26[09:31:08]:	└── method: getTablePath
+07.26[09:31:08]:	└── method: deletePreviousWallpaper
+07.26[09:31:08]:	└── method: createBoxTable
+07.26[09:31:08]:	└── method: makeRect [method: createBoxTable]
+07.26[09:31:14]:	└── method: updateWallpaper
+07.26[09:31:14]: --------------[ DONE ]-------------
+
+
+
+07.26[09:45:59]: ----------[ TODO CONSOLE ]---------
+07.26[09:45:59]: __MAKETASKS.PY__
+07.26[09:45:59]:    ITEM 1: 8 - R - [DOC] INTERPROFESSIONAL COLLAB
+07.26[09:45:59]: Item 1: 8 - R - [DOC] INTERPROFESSIONAL COLLAB
+07.26[09:45:59]:	└── method: taskRename
+07.26[09:45:59]:	└── method: taskRename -- RENAME TASK
+07.26[09:45:59]:	└── method: saveCSV
+07.26[09:45:59]: __MAKETABLE.PY__
+07.26[09:45:59]:	└── method: deletePreviousTable
+07.26[09:45:59]: DELETING PREVIOUS TABLE
+07.26[09:45:59]:	└── method: styleTable
+07.26[09:46:01]: __makeWallpaper.py__
+07.26[09:46:02]:	└── method: getTablePath
+07.26[09:46:02]:	└── method: deletePreviousWallpaper
+07.26[09:46:02]:	└── method: createBoxTable
+07.26[09:46:02]:	└── method: makeRect [method: createBoxTable]
+07.26[09:46:07]:	└── method: updateWallpaper
+07.26[09:46:08]: --------------[ DONE ]-------------
+
+07.26[09:49:26]: __MAKETABLE.PY__
+07.26[09:49:26]:	└── method: deletePreviousTable
+07.26[09:49:26]: DELETING PREVIOUS TABLE
+07.26[09:49:26]:	└── method: styleTable
+07.26[09:49:28]: __makeWallpaper.py__
+07.26[09:49:29]:	└── method: getTablePath
+07.26[09:49:29]:	└── method: deletePreviousWallpaper
+07.26[09:49:29]:	└── method: createBoxTable
+07.26[09:49:29]:	└── method: makeRect [method: createBoxTable]
+07.26[09:49:34]:	└── method: updateWallpaper
+07.26[09:49:35]: --------------[ DONE ]-------------
+
+07.26[09:50:06]: __MAKETABLE.PY__
+07.26[09:50:06]:	└── method: deletePreviousTable
+07.26[09:50:06]: DELETING PREVIOUS TABLE
+07.26[09:50:06]:	└── method: styleTable
+07.26[09:50:07]: __makeWallpaper.py__
+07.26[09:50:08]:	└── method: getTablePath
+07.26[09:50:08]:	└── method: deletePreviousWallpaper
+07.26[09:50:08]:	└── method: createBoxTable
+07.26[09:50:08]:	└── method: makeRect [method: createBoxTable]
+07.26[09:50:14]:	└── method: updateWallpaper
+07.26[09:50:14]: --------------[ DONE ]-------------
+
+07.26[09:50:40]: __MAKETABLE.PY__
+07.26[09:50:40]:	└── method: deletePreviousTable
+07.26[09:50:40]: DELETING PREVIOUS TABLE
+07.26[09:50:40]:	└── method: styleTable
+07.26[09:50:42]: __makeWallpaper.py__
+07.26[09:50:42]:	└── method: getTablePath
+07.26[09:50:42]:	└── method: deletePreviousWallpaper
+07.26[09:50:42]:	└── method: createBoxTable
+07.26[09:50:42]:	└── method: makeRect [method: createBoxTable]
+07.26[09:50:48]:	└── method: updateWallpaper
+07.26[09:50:48]: --------------[ DONE ]-------------
+
+
+
+07.26[09:51:25]: ----------[ TODO CONSOLE ]---------
+07.26[09:51:25]: __MAKETASKS.PY__
+07.26[09:51:25]: NO ITEMS PROVIDED
+07.26[09:51:25]:	└── method: saveCSV
+07.26[09:51:25]: __MAKETABLE.PY__
+07.26[09:51:25]:	└── method: deletePreviousTable
+07.26[09:51:25]: DELETING PREVIOUS TABLE
+07.26[09:51:25]:	└── method: styleTable
+07.26[09:51:27]: __makeWallpaper.py__
+07.26[09:51:27]:	└── method: getTablePath
+07.26[09:51:27]:	└── method: deletePreviousWallpaper
+07.26[09:51:27]:	└── method: createBoxTable
+07.26[09:51:27]:	└── method: makeRect [method: createBoxTable]
+07.26[09:51:33]:	└── method: updateWallpaper
+07.26[09:51:33]: --------------[ DONE ]-------------
+
+
+
+07.26[13:40:17]: ----------[ TODO CONSOLE ]---------
+07.26[13:40:17]: __MAKETASKS.PY__
+07.26[13:40:17]: --------   ITEM 1: 1 - DONE--------
+
+07.26[13:40:17]: ----------Item 1: 1 - DONE---------
+
+07.26[13:40:17]:	└── method: taskComplete -- REMOVE TASK
+07.26[13:40:17]:	└── method: saveCSV
+07.26[13:40:17]: __MAKETABLE.PY__
+07.26[13:40:17]:	└── method: deletePreviousTable
+07.26[13:40:17]: DELETING PREVIOUS TABLE
+07.26[13:40:17]:	└── method: styleTable
+07.26[13:40:20]: __makeWallpaper.py__
+07.26[13:40:20]:	└── method: getTablePath
+07.26[13:40:20]:	└── method: deletePreviousWallpaper
+07.26[13:40:20]:	└── method: createBoxTable
+07.26[13:40:20]:	└── method: makeRect [method: createBoxTable]
+07.26[13:40:26]:	└── method: updateWallpaper
+07.26[13:40:26]: --------------[ DONE ]-------------
+
+07.27[00:05:06]: __MAKETABLE.PY__
+07.27[00:05:06]:	└── method: deletePreviousTable
+07.27[00:05:06]: DELETING PREVIOUS TABLE
+07.27[00:05:06]:	└── method: styleTable
+07.27[00:05:09]: __makeWallpaper.py__
+07.27[00:05:10]:	└── method: getTablePath
+07.27[00:05:10]:	└── method: deletePreviousWallpaper
+07.27[00:05:10]:	└── method: createBoxTable
+07.27[00:05:10]:	└── method: makeRect [method: createBoxTable]
+07.27[00:05:15]:	└── method: updateWallpaper
+07.27[00:05:16]: --------------[ DONE ]-------------
+
+07.27[10:23:36]: __MAKETABLE.PY__
+07.27[10:23:36]:	└── method: deletePreviousTable
+07.27[10:23:36]: DELETING PREVIOUS TABLE
+07.27[10:23:36]:	└── method: styleTable
+07.27[10:23:38]: __makeWallpaper.py__
+07.27[10:23:39]:	└── method: getTablePath
+07.27[10:23:39]:	└── method: deletePreviousWallpaper
+07.27[10:23:39]:	└── method: createBoxTable
+07.27[10:23:39]:	└── method: makeRect [method: createBoxTable]
+07.27[10:23:47]:	└── method: updateWallpaper
+07.27[10:23:47]: --------------[ DONE ]-------------
+
+07.28[00:50:42]: __MAKETABLE.PY__
+07.28[00:50:42]:	└── method: deletePreviousTable
+07.28[00:50:42]: DELETING PREVIOUS TABLE
+07.28[00:50:42]:	└── method: styleTable
+07.28[01:04:14]: __makeWallpaper.py__
+07.28[01:04:14]:	└── method: getTablePath
+07.28[01:04:14]:	└── method: deletePreviousWallpaper
+07.28[01:04:14]:	└── method: createBoxTable
+07.28[01:04:14]:	└── method: makeRect [method: createBoxTable]
+07.28[01:04:20]:	└── method: updateWallpaper
+07.28[01:04:20]: --------------[ DONE ]-------------
+
+
+
+07.28[04:54:25]: ----------[ TODO CONSOLE ]---------
+07.28[04:54:25]: __MAKETASKS.PY__
+07.28[04:54:25]: NO ITEMS PROVIDED
+07.28[04:54:25]:	└── method: saveCSV
+07.28[04:54:25]: __MAKETABLE.PY__
+07.28[04:54:25]:	└── method: deletePreviousTable
+07.28[04:54:25]: DELETING PREVIOUS TABLE
+07.28[04:54:25]:	└── method: styleTable
+07.28[04:54:27]: __makeWallpaper.py__
+07.28[04:54:28]:	└── method: getTablePath
+07.28[04:54:28]:	└── method: deletePreviousWallpaper
+07.28[04:54:28]:	└── method: createBoxTable
+07.28[04:54:28]:	└── method: makeRect [method: createBoxTable]
+07.28[04:54:34]:	└── method: updateWallpaper
+07.28[04:54:34]: --------------[ DONE ]-------------
+
+
+
+07.28[07:18:33]: ----------[ TODO CONSOLE ]---------
+07.28[07:18:33]: __MAKETASKS.PY__
+07.28[07:18:33]:    ITEM 1: 1 - TODAY
+07.28[07:18:33]:    ITEM 2: SUBMIT N95 TO CASTLEBRANCH - TODAY
+07.28[07:18:33]: Item 1: 1 - TODAY
+07.28[07:18:33]:	└── method: taskAddEdit
+07.28[07:18:33]:	└── method: getFullDate
+07.28[07:18:33]:	└── method: taskAddEdit -- EDIT TASK
+07.28[07:18:33]:	└── method: saveCSV
+07.28[07:18:33]: Item 2: SUBMIT N95 TO CASTLEBRANCH - TODAY
+07.28[07:18:33]:	└── method: taskAddEdit
+07.28[07:18:33]:	└── method: getFullDate
+07.28[07:18:33]:	└── method: taskAddEdit -- ADD TASK
+07.28[07:18:33]:	└── method: saveCSV
+07.28[07:18:33]: __MAKETABLE.PY__
+07.28[07:18:33]:	└── method: deletePreviousTable
+07.28[07:18:33]: DELETING PREVIOUS TABLE
+07.28[07:18:33]:	└── method: styleTable
+07.28[07:18:36]: __makeWallpaper.py__
+07.28[07:18:36]:	└── method: getTablePath
+07.28[07:18:36]:	└── method: deletePreviousWallpaper
+07.28[07:18:36]:	└── method: createBoxTable
+07.28[07:18:36]:	└── method: makeRect [method: createBoxTable]
+07.28[07:18:42]:	└── method: updateWallpaper
+07.28[07:18:42]: --------------[ DONE ]-------------
+
+
+
+07.28[08:08:50]: ----------[ TODO CONSOLE ]---------
+07.28[08:08:50]: __MAKETASKS.PY__
+07.28[08:08:50]:    ITEM 1: 3 - TOMORROW
+07.28[08:08:50]: Item 1: 3 - TOMORROW
+07.28[08:08:50]:	└── method: taskAddEdit
+07.28[08:08:50]:	└── method: getFullDate
+07.28[08:08:50]:	└── method: taskAddEdit -- EDIT TASK
+07.28[08:08:50]:	└── method: saveCSV
+07.28[08:08:50]: __MAKETABLE.PY__
+07.28[08:08:50]:	└── method: deletePreviousTable
+07.28[08:08:50]: DELETING PREVIOUS TABLE
+07.28[08:08:50]:	└── method: styleTable
+07.28[08:08:52]: __makeWallpaper.py__
+07.28[08:08:53]:	└── method: getTablePath
+07.28[08:08:53]:	└── method: deletePreviousWallpaper
+07.28[08:08:53]:	└── method: createBoxTable
+07.28[08:08:53]:	└── method: makeRect [method: createBoxTable]
+07.28[08:08:58]:	└── method: updateWallpaper
+07.28[08:08:58]: --------------[ DONE ]-------------
+
+07.28[09:03:46]: __MAKETABLE.PY__
+07.28[09:03:46]:	└── method: deletePreviousTable
+07.28[09:03:46]: DELETING PREVIOUS TABLE
+07.28[09:03:46]:	└── method: styleTable
+07.28[09:03:48]: __makeWallpaper.py__
+07.28[09:03:49]:	└── method: getTablePath
+07.28[09:03:49]:	└── method: deletePreviousWallpaper
+07.28[09:03:49]:	└── method: createBoxTable
+07.28[09:03:49]:	└── method: makeRect [method: createBoxTable]
+07.28[09:03:54]:	└── method: updateWallpaper
+07.28[09:03:55]: --------------[ DONE ]-------------
+
+
+
+07.28[11:42:10]: ----------[ TODO CONSOLE ]---------
+07.28[11:42:10]: __MAKETASKS.PY__
+07.28[11:42:10]: --------   ITEM 1: 1 - DONE--------
+
+07.28[11:42:10]: --------   ITEM 2: 3 - DONE--------
+
+07.28[11:42:10]: --------   ITEM 3: 8 - DONE--------
+
+07.28[11:42:10]: ----------Item 1: 1 - DONE---------
+
+07.28[11:42:10]:	└── method: taskComplete -- REMOVE TASK
+07.28[11:42:10]:	└── method: saveCSV
+07.28[11:42:10]: ----------Item 2: 3 - DONE---------
+
+07.28[11:42:10]:	└── method: taskComplete -- REMOVE TASK
+07.28[11:42:10]:	└── method: saveCSV
+07.28[11:42:10]: ----------Item 3: 8 - DONE---------
+
+07.28[11:42:10]:	└── method: taskComplete -- REMOVE TASK
+07.28[11:42:10]:	└── method: saveCSV
+07.28[11:42:10]: __MAKETABLE.PY__
+07.28[11:42:10]:	└── method: deletePreviousTable
+07.28[11:42:10]: DELETING PREVIOUS TABLE
+07.28[11:42:10]:	└── method: styleTable
+07.28[11:42:12]: __makeWallpaper.py__
+07.28[11:42:12]:	└── method: getTablePath
+07.28[11:42:12]:	└── method: deletePreviousWallpaper
+07.28[11:42:12]:	└── method: createBoxTable
+07.28[11:42:12]:	└── method: makeRect [method: createBoxTable]
+07.28[11:42:18]:	└── method: updateWallpaper
+07.28[11:42:18]: --------------[ DONE ]-------------
+

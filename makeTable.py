@@ -15,18 +15,19 @@ from makeWallpaper import makeWallpaper
 
 ############################################################################
 
+
 # region MAKETABLE
 def makeTable(_from="") -> None:
     # ENTRY POINT FOR LAUNCHDAEMON
     # CALLING THIS SCRIPT FROM LAUNCH DAEMON ALLOWS FOR TABLE TO BE UPDATED
     clearScreen()
-    
+
     myLog("__makeTable.py__".upper())
-    
+
     make_image: bool = True
     images_directory = path_dict["images"]
     table_exists = deletePreviousTable(images_directory)
-    
+
     if _from == "toggle":
         myLog("toggle argument")
         if table_exists:
@@ -68,7 +69,7 @@ def makeTable(_from="") -> None:
         df_styled = df_soon.style.set_table_styles(styleTable(df_soon, HEADER)).hide()
         try:
             if make_image:
-                if not table_exists: 
+                if not table_exists:
                     myLog("TURN DESKTOP ON")
                 dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
         except Exception:
