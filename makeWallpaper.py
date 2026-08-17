@@ -2,6 +2,7 @@ from os import listdir, path
 from subprocess import run
 
 from PIL import Image, ImageDraw
+from PIL.Image import Image as PILImage
 
 from config import log, myLog, path_dict, tableStyle, timeLabel
 
@@ -21,7 +22,7 @@ def makeWallpaper(arg: list = []):
     base_wallpaper_path = path.join(images_dir, wallpaper_name)
     new_wallpaper_savepath = path.join(images_dir, new_wallpaper_name)
     table_path = getTablePath(images_dir)
-    
+
     deletePreviousWallpaper(images_dir)
 
     if table_path == "":
@@ -39,7 +40,9 @@ def makeWallpaper(arg: list = []):
 
 
 def getDisplayInfo(wallpaper_retina: str, wallpaper_multidisplay: str) -> str:
-    applescript = """set screen_width to (do shell script "system_profiler SPDisplaysDataType | awk '/Resolution/{print $2}'")"""
+    applescript = (
+        """set screen_width to (do shell script "system_profiler SPDisplaysDataType | awk '/Resolution/{print $2}'")"""
+    )
     script_output = run(["osascript", "-e", applescript], capture_output=True, text=True)
     screen_size = (script_output.stdout).strip().lstrip().splitlines()
     if screen_size[0] == "2560":
@@ -122,7 +125,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         savepath (str): Full path of new wallpaper to be saved with a unique timestamped name
     """
 
-    def makeRect(image_width: int, image_height: int) -> Image:
+    def makeRect(image_width: int, image_height: int) -> PILImage:
         """
         Makes a colored rounded rectangle.
         Used to give the todo list a border once pasted (this step occurs elsewhere in the code)
@@ -136,7 +139,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         """
         myLog("method: makeRect [method: createBoxTable]")
         color_style = tableStyle()
-        box_background = color_style["box_color"]
+        box_background = color_style["background_color"]
         box_background = "#" + str(box_background)
         corner_radius = 100
 
@@ -146,7 +149,7 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
         return box_py
 
     myLog("method: createBoxTable")
-    screen_x = 40
+    screen_x = 35
     screen_y = 475
     crop = 5
     table_image_py = Image.open(table_image_path)
@@ -154,23 +157,16 @@ def createBoxTable(table_image_path: str, stock_wallpaper: str, savepath: str) -
 
     table_width = table_image_py.width
     table_height = table_image_py.height
-    # width_ratio = (1+(4.75/100))
-    # height_ratio = (1+(7/100))
-    # top_shift_ratio = (20.5/100)
-    width_ratio = 1 + (6 / 100)
-    height_ratio = 1 + (20 / 100)
     top_shift_ratio = 40 / 100
-    # new_width = round(table_width * width_ratio)
-    # new_height = round(table_height * height_ratio)
     new_width = round(table_width + 100)
-    new_height = round(table_height + 150)
+    new_height = round(table_height + 125)
     border_image_py = makeRect(new_width, new_height)
     table_x = round((new_width - table_width) / 2)
     table_y = round(round((new_height - table_height)) * top_shift_ratio)
 
     bordered_table_py = border_image_py.resize([new_width, new_height])
     border_image_py.close()
-    bordered_table_py.paste(table_image_py, [table_x, table_y])
+    bordered_table_py.paste(table_image_py, (table_x, table_y))
     table_image_py.close()
     wallpaper_image_py = Image.open(stock_wallpaper)
 

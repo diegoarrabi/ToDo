@@ -54,7 +54,7 @@ ToDo Application:
     "help" | "h" ---------------- this message
 
     To rename a task use "task-name|index - r - new-name"
-    To flag a task use "task-name|index - i"
+    To flag a task use "task-name|index - !"
 EOF
     echo "\x1b[${HEIGHT}B"
     read -q "CONTINUE?Continue? (enter: no; y: yes): "

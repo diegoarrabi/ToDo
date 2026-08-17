@@ -6,24 +6,6 @@ from shutil import copy
 from subprocess import run
 from sys import exit as _exit
 
-# GLOBALS
-# CONFIG ONLY
-DEBUG = False
-if DEBUG:
-	table_name = "resources/debug.csv"
-	backup_table_name = "resources/.backup/debug.csv"
-else:
-	table_name = "TaskList.csv"
-	backup_table_name = "resources/.backup/TaskList.csv"
-
-code_wrap = 150
-half_tab = 2
-
-
-# MAKETABLE.PY
-day_limit = 5
-
-
 class CustomLogFormatter(log.Formatter):
 	# DEBUG     -> 10
 	# INFO      -> 20
@@ -39,26 +21,22 @@ class CustomLogFormatter(log.Formatter):
 		# CODE START
 		if record.levelno == log.CRITICAL:
 			self._style._fmt = "\n\n%(asctime)s: %(message)s"
-			# self._style._fmt = f'\n\n%(asctime)s: %(message)s'
 		# METHOD START
 		elif record.levelno == log.INFO:
 			self._style._fmt = "%(asctime)s:\t└── %(message)s"
-			# self._style._fmt = f'%(asctime)s:\t└── %(message)s'
 		# ERROR DETECTED
 		elif record.levelno == log.ERROR:
 			self._style._fmt = "%(message)s"
-			# self._style._fmt = f'%(message)s'
 		# ALL OTHER MESSAGES
 		else:
 			self._style._fmt = "%(asctime)s: %(message)s"
-			# self._style._fmt = f'%(asctime)s: %(message)s'
 		return super().format(record)
 
-	def formatException(self, exception_info):
+	def formatException(self, ei):
 		global code_wrap
 		global half_tab
 
-		result = (super().formatException(exception_info)).splitlines()
+		result = (super().formatException(ei)).splitlines()
 		result_formatted_list = [
 			f"{half_tab * ' '}│{half_tab * ' '}{strline}" for strline in result
 		]
@@ -96,7 +74,7 @@ def myLog(message: str, log_level=log.DEBUG):
 	elif log_level == log.ERROR:
 		log_message = f"ERROR: {message}"
 		my_logger.error(log_message, exc_info=True)
-		getDialog(log_file, message)
+		# getDialog(log_file, message)
 	# SCRIPT END
 	elif "done" in message.lower():
 		message = f"{message.center(35, '-')}\n"
@@ -245,33 +223,6 @@ def timeLabel(prefix=""):
 
 	return f"{prefix}{''.join(getTime())}"
 
-
-# LIGHT
-# def tableStyle():
-#     cautionColor = "004874"
-#     priorityColor = "941717"
-#     cStyle = {}
-#     cStyle["head_font"] = "SF Pro Rounded"
-#     cStyle["body_font"] = "SF Mono"
-#     cStyle["head_font_size"] = 1.2
-#     cStyle["body_font_size"] = 1.3
-#     cStyle["border_width"] = 4
-
-#     # BOX COLOR
-#     cStyle["box_color"] = "828282"
-
-#     cStyle["head_font_color"] = "D0D0D0"
-#     cStyle["body_font_color"] = "F0F0F0"
-#     cStyle["header_line_color"] = "F0F0F0"
-
-#     cStyle["rowCoE"] = "828282"  # / Dark
-#     cStyle["rowCoO"] = "9B9B9B"  # / Light
-#     cStyle["pastCo"] = cautionColor  # / PastDue Color
-#     cStyle["priorityCo"] = priorityColor  # / PastDue Color
-#     return cStyle
-
-
-# DARK
 def tableStyle():
 	cautionColor = "F86702"
 	priorityColor = "FB3819"
@@ -283,18 +234,34 @@ def tableStyle():
 	cStyle["border_width"] = 4
 
 	# BOX COLOR
-	cStyle["box_color"] = "353535"
+	cStyle["background_color"] = "1E1E1E"
 
-	cStyle["head_font_color"] = "8E8E8E"
+	cStyle["head_font_color"] = "737373"
 	cStyle["body_font_color"] = "E0E0E0"
-	cStyle["header_line_color"] = "E2E2E2"
+	cStyle["header_line_color"] = "737373"
 
-	cStyle["rowCoE"] = "424242"  # / Dark
-	cStyle["rowCoO"] = "353535"  # / Light
-	cStyle["pastCo"] = cautionColor  # / PastDue Color
-	cStyle["priorityCo"] = priorityColor  # / PastDue Color
+	cStyle["row_even_color"] = "262626"  # / Dark
+	cStyle["row_odd_color"] = "1E1E1E"  # / Light
+	cStyle["pastdue_color"] = cautionColor  # / PastDue Color
+	cStyle["priority_color"] = priorityColor  # / PastDue Color
 	return cStyle
 
+# GLOBALS
+# CONFIG ONLY
+DEBUG = True
+if DEBUG:
+	table_name = "resources/debug.csv"
+	backup_table_name = "resources/.backup/debug.csv"
+else:
+	table_name = "TaskList.csv"
+	backup_table_name = "resources/.backup/TaskList.csv"
+
+code_wrap = 150
+half_tab = 2
+
+
+# MAKETABLE.PY
+day_limit = 5
 
 # MakeAssignments & MakeTable
 path_dict = pathDict()

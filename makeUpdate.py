@@ -19,7 +19,7 @@ def makeUpdate() -> None:
     DATE_COL = 1
     max_day = None
     for row, _ in df_todo.iterrows():
-        task_date = date.fromisoformat(df_todo.at[row, DATE_COL])
+        task_date = date.fromisoformat(str(df_todo.at[row, DATE_COL]))
         days_between = (task_date - today).days
 
         # filters out tasks not overdue
@@ -42,9 +42,11 @@ def makeUpdate() -> None:
 
 def saveCSV(df_list: pd.DataFrame, date_column: int, date_format: str) -> None:
     myLog("method: saveCSV")
+
     df_list[date_column] = pd.to_datetime(df_list[date_column], format=date_format)
-    df_list = df_list.sort_values(by=date_column)
+    df_list = df_list.sort_values(by=date_column)  # type: ignore
     df_list = df_list.reset_index(drop=True)
+    exit()
     df_list.to_csv(csv_path, index=False, header=False, date_format=date_format)
 
 

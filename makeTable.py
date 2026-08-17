@@ -71,9 +71,9 @@ def makeTable(_from="") -> None:
             if make_image:
                 if not table_exists:
                     myLog("TURN DESKTOP ON")
-                dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300)
-        except Exception:
-            myLog("DataFrame_Image Module Error", log.ERROR)
+                dfi.export(df_styled, path.join(images_directory, "table.png"), dpi=300) # type: ignore
+        except Exception as e:
+            myLog(f"DataFrame_Image Module Error: {e}", log.ERROR)
     makeWallpaper()
 
 
@@ -102,7 +102,7 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
     cStyle = tableStyle()
     border_width = cStyle["border_width"]
 
-    box_color = cStyle["box_color"]
+    background_color = cStyle["background_color"]
 
     head_font = cStyle["head_font"]
     header_line_color = cStyle["header_line_color"]
@@ -111,46 +111,48 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
     body_fontsize = cStyle["body_font_size"]
     head_font_color = cStyle["head_font_color"]
     body_font_color = cStyle["body_font_color"]
-    rECo = cStyle["rowCoE"]
-    rOCo = cStyle["rowCoO"]
+    row_even_color = cStyle["row_even_color"]
+    row_odd_color = cStyle["row_odd_color"]
 
-    paddingHead = f"padding-top: {0}em; padding-bottom: {0}em;"  # % (0, 0)
-    propsHead = f"font-weight:bold; background-color:#{box_color}; font-family: {head_font}; color: #{head_font_color}; font-size: {head_fontsize}em;"
+    # HEADER
+    pad_head = "padding-top: 0em; padding-bottom: 0em;"
+    properties_head = f"font-weight:600; background-color:#{background_color}; font-family: {head_font}; color: #{head_font_color}; font-size: {head_fontsize}em;"
 
-    paddingBody = f"padding-top: {0.4}em; padding-bottom: {0.4}em;"
-    # paddingBody = f"padding-top: {0.3}em; padding-bottom: {0.3}em;"
-    # paddingBodyL = f"padding-left: {0.5}em;"
-    paddingBodyL = f"padding-left: {0.5}em; padding-top: {0.4}em; padding-bottom: {0.4}em;"
-    propsBodyE = f"font-weight:normal; background-color: #{rECo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
-    propsBodyO = f"font-weight:normal; background-color: #{rOCo}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
+    pad_body = "padding-top: 0.4em; padding-bottom: 0.4em;"
+    pad_body_left = "padding-left: 0.5em; padding-top: 0.4em; padding-bottom: 0.4em;"
+    properties_even = f"font-weight:normal; background-color: #{row_even_color}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
+    properties_odd = f"font-weight:normal; background-color: #{row_odd_color}; font-family: {body_font}; color: #{body_font_color}; font-size: {body_fontsize}em;"
 
-    bhBottom = f"border-bottom: {border_width - 2}px solid #{header_line_color};"
-    bTop = f"border-top: {border_width}px solid #{box_color};"
-    bRight = f"border-right: {border_width}px solid #{box_color};"
-    bBottom = f"border-bottom: {border_width}px solid #{box_color};"
-    bLeft = f"border-left: {border_width}px solid #{box_color};"
+    header_border = f"border-bottom: {border_width - 2}px solid #{header_line_color};"
+    border_top = f"border-top: {border_width}px solid #{background_color};"
+    border_right = f"border-right: {border_width}px solid #{background_color};"
+    border_bottom = f"border-bottom: {border_width}px solid #{background_color};"
+    border_left = f"border-left: {border_width}px solid #{background_color};"
 
     styleList = [
         # COLOR
-        {"selector": "th.col_heading", "props": f"{propsHead}; {paddingHead}; {bTop}; {bhBottom};"},
-        {"selector": "tbody tr:nth-child(even)", "props": f"{propsBodyE};"},
-        {"selector": "tbody tr:nth-child(odd)", "props": f"{propsBodyO};"},
+        # ##### HEADER
+        {"selector": "th.col_heading", "props": f"{properties_head}; {pad_head}; {border_top}; {header_border};"},
+        # ##### EVEN
+        {"selector": "tbody tr:nth-child(even)", "props": f"{properties_even};"},
+        # ##### ODD
+        {"selector": "tbody tr:nth-child(odd)", "props": f"{properties_odd};"},
         # ALIGNMENT
-        {"selector": "th.col0", "props": f"text-align: left;{bLeft}; {paddingBodyL}; min-width: 450px;"},
-        {"selector": "td.col0", "props": f"text-align: left; {paddingBodyL}; {bLeft};"},
+        # ##### 1ST COLUMN "TASKS"
+        {"selector": "th.col0", "props": f"text-align: left;{border_left}; {pad_body_left}; min-width: 440px;"},
+        {"selector": "td.col0", "props": f"text-align: left; {pad_body_left}; {border_left};"},
+        # ##### 2ND COLUMN "DUE DATE"
         {"selector": "th.col1", "props": "text-align: center;"},
-        {"selector": "td.col1", "props": f"text-align: center; {paddingBody}"},
-        {"selector": "th.col2", "props": f"text-align: center; {bRight}"},
-        {"selector": "td.col2", "props": f"text-align: right; {paddingBody}; {bRight}"},
+        {"selector": "td.col1", "props": f"text-align: center; {pad_body}"},
+        # ##### 3RD COLUMN "DAYS"
+        {"selector": "th.col2", "props": f"text-align: center; {border_right}"},
+        {"selector": "td.col2", "props": f"text-align: right; {pad_body}; {border_right}"},
+        # ##### REMOVES DAY COUNTER
         {"selector": "td.col3", "props": "display: none"},
         {"selector": "th.col3", "props": "display: none"},
-        {"selector": "tbody tr:nth-last-child(1)", "props": f"{paddingBody}"},
-        {"selector": "tbody tr:nth-last-child(1)", "props": f"text-align: right; {paddingBody}; {bBottom}"},
+        # ##### LAST ROW
+        {"selector": "tbody tr:nth-last-child(1)", "props": f"text-align: right; {pad_body}; {border_bottom}"},
     ]
-
-    # today_length = len(df[df[headerCol[2]].str.contains("!")])
-    # important_length = len(df[df[headerCol[0]].str.contains("!")])
-    # priority_length = max(today_length, important_length)
 
     count = 0
     for index, row in df.iterrows():
@@ -159,35 +161,21 @@ def styleTable(df: pd.DataFrame, headerCol: list) -> list:
         tempToday[dict_keys[0]] = ""
         # Priority Tasks
         if "!" in row["TASKS"]:
-            tempToday[dict_keys[1]] = "\
+            tempToday[dict_keys[1]] = (
+                "\
                 text-decoration: underline solid 0.15em #%s; \
                 font-weight: bold; \
-                color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
+                color: #%s;"
+                % (cStyle["priority_color"], cStyle["priority_color"])
+            )
         elif "!" in row["DAYS"]:
-            tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
+            tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastdue_color"])
         else:
             break
         tempToday["selector"] = f"tbody tr:nth-child({count + 1})"
         count += 1
         styleList.append(tempToday)
         del tempToday
-
-    # if priority_length > 0:
-    #     for i in range(priority_length):
-    #         tempToday = {}
-    #         dict_keys = ["selector", "props"]
-    #         tempToday[dict_keys[0]] = ""
-    #         if important_length != 0:
-    #             tempToday[dict_keys[1]] = "\
-    #                 text-decoration: underline solid 0.15em #%s; \
-    #                 font-weight: bold; \
-    #                 color: #%s;" % (cStyle["priorityCo"], cStyle["priorityCo"])
-    #             important_length -= 1
-    #         else:
-    #             tempToday[dict_keys[1]] = "font-weight: bold; color: #%s;" % (cStyle["pastCo"])
-    #         tempToday["selector"] = f"tbody tr:nth-child({i + 1})"
-    #         styleList.append(tempToday)
-    #         del tempToday
 
     return styleList
 

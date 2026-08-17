@@ -18,6 +18,7 @@ def makeTasks(arg: list) -> None:
     myLog("-[ TODO CONSOLE ]-")
     myLog("__makeTasks.py__".upper())
 
+
     todos_list = pd.read_csv(csv_path, header=None)
         
     if len(arg) == 0:
@@ -25,7 +26,6 @@ def makeTasks(arg: list) -> None:
         saveCSV(todos_list)
     elif arg[0] == "toggle":
         makeTable(arg[0])
-        return 0
     else:
         logAllTasks(arg)
         for _index, _item in enumerate(arg):
@@ -34,7 +34,7 @@ def makeTasks(arg: list) -> None:
                 task_info = _item.split(" - ")
                 if task_info[0].isdigit():
                     task_info[0] = todos_list.iloc[int(task_info[0])-1, 0]
-                if "i" in task_info:
+                if "!" in task_info:
                     taskImportance(task_info)
                     continue
                 if "r" in task_info:
@@ -77,7 +77,7 @@ def taskImportance(assignment_info: list[str]) -> None:
     # USING AN INTEGER TO EDIT A TASK
     for _index in range(all_assignments_count):
 
-        task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
+        task_label = str(df_todo.loc[_index, ASSIGNMENT_COL]).lower()
         if task_label == assignment_info[0].lower():
             if task_label[-1] == "!":
                 myLog("method: taskImportance - NOT IMPORTANT")
@@ -107,7 +107,7 @@ def taskRename(assignment_info: list[str]) -> None:
         saveCSV(df_todo)
         return
     for _index in range(all_assignments_count):
-        task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
+        task_label = str(df_todo.loc[_index, ASSIGNMENT_COL]).lower()
         if task_label == assignment_info[0].lower():
             myLog("method: taskRename -- RENAME TASK")
             df_todo.loc[_index, ASSIGNMENT_COL] = assignment_info[ASSIGNMENT_NEW_NAME]
@@ -121,7 +121,7 @@ def taskRename(assignment_info: list[str]) -> None:
 def taskAddEdit(assignment_info: list[str]) -> None:
     myLog("method: taskAddEdit")
 
-    def invalidInput(item_info: list[str]) -> None:
+    def invalidInput(item_info: list[str]) -> datetime:
         """
         If input is invalid, returns '05/25/1996' datetime.
         That datetime will act as an 'Invalid Input' and will skip the current input
@@ -160,7 +160,8 @@ def taskAddEdit(assignment_info: list[str]) -> None:
 
             if today_compare <= item_compare:
                 item_year = today_date.year
-            elif today_compare > item_compare:
+            else:
+            # elif today_compare > item_compare:
                 item_year = today_date.year + 1
             return datetime(int(item_year), int(item_month), int(item_day))
         else:
@@ -181,7 +182,7 @@ def taskAddEdit(assignment_info: list[str]) -> None:
         saveCSV(df_todo)
         return
     for _index in range(all_assignments_count):
-        task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
+        task_label = str(df_todo.loc[_index, ASSIGNMENT_COL]).lower()
         if task_label == assignment_info[0].lower():
             myLog("method: taskAddEdit -- EDIT TASK")
             df_todo.loc[_index, DATE_COL] = item_date
@@ -215,7 +216,7 @@ def taskComplete(assignment_info: list) -> None:
         return
 
     for _index in range(all_assignments_count):
-        task_label = df_todo.loc[_index, ASSIGNMENT_COL].lower()
+        task_label = str(df_todo.loc[_index, ASSIGNMENT_COL]).lower()
         if task_label == assignment_info[0].lower():
             df_todo.drop(_index, inplace=True)
             saveCSV(df_todo)
